@@ -17,7 +17,11 @@ from pathlib import Path
 base_dir = Path(__file__).parent
 sys.path.append(str(base_dir))
 
-from utility_lib import func_running_time, get_txt_files_from_folder, check_required_files_exist, path2linux
+from utility_lib import (func_running_time,
+                         get_txt_files_from_folder,
+                         check_required_files_exist,
+                         path2linux,
+                         validate_filename)
 
 from func_lib import (reading_text,
                       hhmm_to_minutes,
@@ -31,10 +35,10 @@ from func_lib import (reading_text,
                       transferring_penalty,
                       allowed_use_transferring)
 
-
 class GTFS2GMNS:
 
-    def __init__(self, gtfs_dir: str, gtfs_result_dir:str = "", time_period: str = '1200_1300'):
+    def __init__(self, gtfs_dir: str, gtfs_result_dir:str = "", time_period: str = '0700_0800'):
+
         # TDD development
         if not os.path.isdir(gtfs_dir):
             raise ValueError('The input folder does not exist.')
@@ -172,7 +176,7 @@ class GTFS2GMNS:
 
         print("Info: merge the route information with trip information...")
         directed_trip_route_stop_time_df = pd.merge(trip_route_df, stop_time_df_with_terminal, on='trip_id')
-        print(f"number of final merged records = {len(directed_trip_route_stop_time_df)}")
+        print(f"    number of final merged records = {len(directed_trip_route_stop_time_df)}")
         print("Info: Data reading done.. \n")
 
         #  as trip is higher level planning than stop time scheduling, len(stop_time_df)>=len(trip_df)
@@ -507,9 +511,8 @@ class GTFS2GMNS:
 
         return all_link_list
 
-    def main(self):
-
-        #  step 1. reading data 
+    def main(self, isSaveToCSV: bool = True):
+        #  step 1. reading data
         stop_df, route_df, trip_df, trip_route_df, stop_time_df, directed_trip_route_stop_time_df = self.read_gtfs_data(self.gtfs_dir)
 
         #  directed_trip_route_stop_time_df.to_csv(gtfs_folder_list[i] + '/timetable.csv', index=False)
@@ -551,23 +554,28 @@ class GTFS2GMNS:
                                     20: 'agency_name',
                                     21: 'stop_sequence',
                                     22: 'directed_service_id'}, inplace=True)
+        all_link_df = all_link_df.drop_duplicates(
+                    subset=['from_node_id', 'to_node_id'],
+                    keep='last').reset_index(drop=True)
 
         # step 4. save node and link data
         # create node and link result path
-        node_result_file = path2linux(os.path.join(self.gtfs_result_dir, "node.csv"))
-        link_result_file = path2linux(os.path.join(self.gtfs_result_dir, "link.csv"))
+        if isSaveToCSV:
+            node_result_file = path2linux(os.path.join(self.gtfs_result_dir, "node.csv"))
+            link_result_file = path2linux(os.path.join(self.gtfs_result_dir, "link.csv"))
 
-        #  zone_df = pd.read_csv('zone.csv')
-        #  source_node_df = pd.read_csv('source_node.csv')
-        #  node_df = pd.concat([zone_df, all_node_df])
-        node_df.to_csv(node_result_file, index=False)
+            # validate result file path exist or not, if exist, create new file wit _1 suffix
+            node_result_file = validate_filename(node_result_file)
+            link_result_file = validate_filename(link_result_file)
 
-        all_link_df = all_link_df.drop_duplicates(
-            subset=['from_node_id', 'to_node_id'],
-            keep='last').reset_index(drop=True)
-        all_link_df.to_csv(link_result_file, index=False)
-
-        print(f"Info: successfully converted gtfs data to node and link data:\n  {node_result_file}, {link_result_file}")
+            #  zone_df = pd.read_csv('zone.csv')
+            #  source_node_df = pd.read_csv('source_node.csv')
+            #  node_df = pd.concat([zone_df, all_node_df])
+            node_df.to_csv(node_result_file, index=False)
+            all_link_df.to_csv(link_result_file, index=False)
+            print(f"Info: successfully converted gtfs data to node and link data:\n  {node_result_file}, {link_result_file}")
+        else:
+            print("Info: successfully converted gtfs data to node and link and return node and link dataframe")
 
         return node_df, all_link_df
 
@@ -577,6 +585,6 @@ if __name__ == '__main__':
     gtfs_dir = r'C:\Users\roche\Anaconda_workspace\001_Github.com\GTFS2GMNS\test\GTFS'
     # gtfs_dir = r'C:\Users\roche\Anaconda_workspace\001_Github.com\GTFS2GMNS\test\GTFS\Phoenix'
     output_gmns_path = '.'
-    time_period = '1200_1300'
+    time_period = '0700_0800'
 
     node_df, link_df = GTFS2GMNS(gtfs_dir, output_gmns_path, time_period).main()

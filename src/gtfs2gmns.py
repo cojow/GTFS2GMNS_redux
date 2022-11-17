@@ -176,7 +176,6 @@ def _convert_route_type_to_link_type(route_type):
     return link_type
 
 
-
 # WGS84 transfer coordinate system to distance(mile) #xy
 def _calculate_distance_from_geometry(lon1, lat1, lon2, lat2):
     radius = 6371

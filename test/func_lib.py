@@ -22,7 +22,7 @@ def reading_text(filename: str) -> pd.DataFrame:
             if len(line.split('\n')[0].split(',')) == len(first_line):
                 data.append(line.split('\n')[0].split(','))
             else:
-                data.append(_split_ignore_separators_in_quoted(line))
+                data.append(split_ignore_separators_in_quoted(line))
     data_frame = pd.DataFrame(data[1:], columns=data[0])
     return data_frame
 
@@ -154,4 +154,4 @@ if __name__ == '__main__':
 
     path = r"C:\Users\roche\Anaconda_workspace\001_Github.com\GTFS2GMNS\test\GTFS\routes"
 
-    df = _reading_text(path)
+    df = reading_text(path)

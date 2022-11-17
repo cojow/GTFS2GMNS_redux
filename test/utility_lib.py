@@ -56,12 +56,28 @@ def check_required_files_exist(required_files: list, dir_files: list) -> bool:
     return False
 
 
+def validate_filename(path_filename: str, ) -> str:
+    """if the file name exist in path,then create new file name with _1, _1_1, ..."""
+    filename_abspath = path2linux(os.path.abspath(path_filename))
+
+    file_suffix = filename_abspath.split(".")[-1]
+    file_without_suffix = filename_abspath[:-len(file_suffix) - 1]
+
+    if os.path.exists(filename_abspath):
+        filename_update = f"{file_without_suffix}_1.{file_suffix}"
+        return validate_filename(filename_update)
+    return filename_abspath
+
+
 if __name__ == "__main__":
     dir_name = r"C:\Users\roche\Anaconda_workspace\001_Github.com\GTFS2GMNS\test\GTFS"
 
-    files_from_folder_abspath = get_txt_files_from_folder(dir_name, isTraverseSubdirectory=False)
+    # files_from_folder_abspath = get_txt_files_from_folder(dir_name, isTraverseSubdirectory=False)
 
-    files_required = ["agency.txt", "routes.txt", "shapes.txt", "stops.txt", "trips.txt"]
-    required_files_abspath = [path2linux(os.path.join(dir_name, file)) for file in files_required]
+    # files_required = ["agency.txt", "routes.txt", "shapes.txt", "stops.txt", "trips.txt"]
+    # required_files_abspath = [path2linux(os.path.join(dir_name, file)) for file in files_required]
 
-    isFilesExist = check_required_files_exist(required_files_abspath, files_from_folder_abspath)
+    # isFilesExist = check_required_files_exist(required_files_abspath, files_from_folder_abspath)
+
+    filename = "./node.csv"
+    ss = validate_filename("./node.csv")
