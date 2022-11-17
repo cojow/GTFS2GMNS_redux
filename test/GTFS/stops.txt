@@ -1,0 +1,153 @@
+stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon
+unimai,117,"University Dr at Main St",,38.846154,-77.30532
+kinkin,178,"Kingsbridge Dr at Kings Crown Ct",,38.868263,-77.279938
+arlingstone_o,185,"Arlington Blvd at Stonehurst Dr",,38.865144,-77.265038
+uniocc,29,"University Dr at Occoquan",,38.83509,-77.310097
+leereb,140,"Fairfax Blvd at Rebel Run",,38.863198,-77.287024
+nuther,183,"Nutley St at Hermosa Dr",,38.874044,-77.264042
+jerjam,162,"Jermantown Rd at James Swarts",,38.85358,-77.332601
+oldlee,144,"Old Lee Highway at Fx Circle Shopping",,38.863,-77.276613
+leefai_o,,"Lee Highway at Fairfax Circle Plaza",,38.864673,-77.275845
+maifse,110,"Main Street and Maple Ave",,38.842982,-77.284695
+leequeen,93,"Old Lee Highway at Queen Anne Dr",,38.857058,-77.288118
+leelay,151,"Old Lee Highway at Layton Hall Dr",,38.85028,-77.299293
+maiwhi,108,"Main St at Whitacre Rd",,38.842168,-77.278358
+maifsw,111,"Main Street and Stonewall Ave",,38.843515,-77.288987
+picpos,103,"Pickett Rd at Post Office",,38.850994,-77.272576
+leelaysch,90,"Old Lee Highway at Daniel Run School",,38.852723,-77.29626
+faicha,66,"Fairfax Blvd at Chain Bridge Rd",,38.85845,-77.307278
+picmat,105,"Pickett Rd at Mathy Dr",,38.844671,-77.271974
+leesta,139,"Fairfax Blvd at Stafford Dr",,38.862534,-77.290998
+picpic,46,"Pickett Rd at Pickett Shopping Center",,38.842993,-77.271427
+chcoun,24,"Chain Bridge Road at County Court House",,38.844125,-77.308007
+blafiv,59,"Blake Ln at Five Oaks Rd",,38.87344,-77.281438
+leecha,133,"Chain Bridge Road and Fairfax Blvd",,38.857545,-77.307359
+warhil,169,"Warwick Ave at Hill St",,38.858301,-77.322569
+leechi,158,"Lee Highway at Chipotle (Holly)",,38.852463,-77.326843
+maivir,113,"Main St at Virginia St",,38.8442,-77.294543
+warbou,196,"Warwick Ave at Shops at Ffx",,38.856934,-77.315376
+uniarm,33,"University Dr at Armstrong St",,38.841629,-77.306806
+ffxbldg,87,"Main Street at Fairfax Bldg",,38.847531,-77.310383
+leewil,152,"Old Lee Highway at Willard Way",,38.847827,-77.301511
+blabel_o,4,"Blake Ln at Bel Glade",,38.870941,-77.279055
+gmu_ar,,"Rappahannock Ln at Patriot Circle - Arrival",,38.834784,-77.306982
+jercop,165,"Jermantown Rd at Fair Haven Ct",,38.859331,-77.329245
+pictha,100,"Pickett Rd at Thaiss Park",,38.860499,-77.270675
+chacou,189,"Chain Bridge Road and Judicial Drive",,38.842959,-77.30854
+leeeat,175,"Fairfax Blvd at Eaton Pl",,38.860328,-77.301373
+maikei,155,"Main St at Keith Ave",,38.84919,-77.315139
+leefai,,"Lee Highway at Fairfax Circle Plaza",,38.864565,-77.275186
+maihal,157,"Main St at Hallman St",,38.851528,-77.320791
+mairob,114,"Main St at Roberts Rd",,38.844545,-77.297132
+judjon,193,"Judicial Dr at Jones St",,38.844523,-77.314915
+faidra,176,"Draper Drive at Fairfax Blvd",,38.864312,-77.281268
+chapro,132,"Chain Bridge Road at Stratford Drive",,38.855176,-77.307299
+mairal,86,"Main St at Railroad Ave",,38.848501,-77.313133
+warmer,170,"Warwick Ave at Meredith Dr",,38.857244,-77.317458
+chaorc,134,"Chain Bridge Road at Marriott Hotel",,38.861005,-77.307249
+arlingstone,180,"Arlington Blvd at Stonehurst Dr",,38.864878,-77.26767
+pubstation_bayc_a,,"Vienna/Fairfax - GMU Metro Station (Arrival)",,38.878667,-77.272232
+chinov,27,"Chain Bridge Rd at Canfield Street",,38.838649,-77.311754
+picsil,101,"Pickett Rd at Silver King Ct",,38.856783,-77.271041
+chawes,126,"Chain Bridge Rd at West Dr",,38.839914,-77.310595
+leepic,97,"Old Lee Highway at Old Pickett Rd",,38.863028,-77.276365
+leecam,143,"Fairfax Blvd at Campbell Dr",,38.864315,-77.277038
+arlingpick,179,"Fairfax Blvd and Pickett Road",,38.864781,-77.271596
+maioak,156,"Main St at Oak St",,38.850142,-77.317394
+leerus,79,"Lee Highway and Rust Road",,38.85172,-77.331487
+cousut,60,"Country Creek at Village Spring Lane",,38.8782,-77.27839
+warbur,68,"Warwick Ave at Burrows Ave",,38.85699,-77.314645
+gmassch_gm,121,"George Mason Blvd at School St",,38.837496,-77.309041
+blakek,5,"Blake Ln at Kingsbridge Dr",,38.86897,-77.277199
+gmu_a,,"Rappahannock Ln at Patriot Circle (Arrival)",,38.834785,-77.306988
+faifai,55,"Fairfax Blvd at Fairfax Circle Plaza",,38.865452,-77.274691
+warbev,71,"Warwick Ave at Bevan Dr",,38.859325,-77.326142
+gmu,30,"Rappahannock Ln at Patriot Circle",,38.834623,-77.30696
+gmassch_sta,32,"George Mason Blvd at School St",,38.836914,-77.308972
+leestleo,150,"Old Lee Highway at St. Leo's Church",,38.852816,-77.296293
+mailoc,115,"Main St at Locust St",,38.844874,-77.299684
+judmai,194,"Judicial Dr at Main St",,38.848388,-77.313965
+uninorth,187,"University Dr at North St",,38.846752,-77.304823
+wesmai,188,"West at Fx Courthouse",,38.844589,-77.308205
+jercav,166,"Jermantown Rd at Cavalier Ct",,38.861656,-77.32695
+chprov,20,"Chain Bridge Rd at Providence Way",,38.854697,-77.30755
+chaken,131,"Chain Bridge Rd at Kenmore Dr",,38.851595,-77.307646
+pubstation,1,"Vienna Metro North Bay E",,38.878865,-77.271425
+blabel,58,"Blake Ln at Bel Glade",,38.87111,-77.27895
+chawhi,130,"Chain Bridge Rd at Whitehead St",,38.84885,-77.306334
+leerid,145,"Old Lee Highway at Ridge Ave",,38.861454,-77.278
+unibri,123,"University Drive and Chain Bridge Road",,38.835126,-77.311582
+blabla,6,"Blake Ln at Blake Ln Loop",,38.867684,-77.274857
+leeemb,191,"Old Lee Highway at Embassy Ln",,38.855711,-77.290871
+bevlan,168,"Bevan Dr at Lanier School",,38.85945,-77.32649
+104lee,173,"Fairfax Blvd at Denny's Rest",,38.858635,-77.306171
+leedra,141,"Fairfax Blvd at Draper Drive",,38.863845,-77.281114
+maipic,107,"Main St at Pickett Rd",,38.841438,-77.272862
+picbar,102,"Pickett Rd at Barrister's Keep",,38.852191,-77.272176
+nutbar_o,184,"Nutley St at Barrick St",,38.866956,-77.262388
+leeuni,174,"Fairfax Blvd at University Dr",,38.859435,-77.304012
+mailyn,109,"Main St at Lyndhurst",,38.842558,-77.281473
+leefhs,147,"Old Lee Highway at Fairfax High School",,38.858118,-77.286552
+gmu2,,"Rappahannock Ln at Patriot Circle (Arrival)",,38.83487,-77.307001
+jerlee,78,"Jermantown Rd at Lee Highway",,38.852508,-77.332552
+leejer,160,"Lee Highway at Jermantown Rd",,38.851931,-77.331586
+station,,"Vienna Metro North Bay D (Arrival)",,38.878461,-77.271557
+chafcc,128,"Chain Bridge Road At Fx County Court",,38.844867,-77.307152
+oldpic,54,"Old Pickett Road at Old Lee Highway",,38.863189,-77.274753
+leespr,142,"Fairfax Blvd at Spring St",,38.864093,-77.279026
+piccol,104,"Pickett Rd at Colonial Ave",,38.848403,-77.27323
+geoarm,120,"George Mason Blvd at Armstrong St",,38.841132,-77.307145
+jerjer,161,"Jermantown Rd at Jermantown Square",,38.852327,-77.332223
+jerkut,164,"Jermantown Rd at Comfort Inn",,38.857463,-77.330984
+pubstation_bayb_a,,"Vienna Metro Station Bay B - Arrival",,38.878662,-77.272234
+leepla,138,"Fairfax Blvd at Plantation Pkwy",,38.862008,-77.293774
+pictur,106,"Pickett Rd at Turnpike Shopping Center",,38.842828,-77.271801
+pubstation_bayd,1,"Vienna Metro North Bay D",,38.878472,-77.27147
+pubstation_bayb,1,"Vienna Metro Station Bay B",,38.878551,-77.272201
+pubstation_bayc,1,"Vienna Metro North Bay C",,38.878559,-77.272199
+leeher,149,"Old Lee Highway at Heritage Ln",,38.854874,-77.292366
+maiusc,116,"Main Street Market Place",,38.84523,-77.301425
+eatfai,136,"Eaton Place at 10306 Block",,38.861048,-77.303821
+leehol,81,"Lee Highway at Holly Street",,38.85227,-77.326682
+leecor,94,"Old Lee Highway and Cornell Road",,38.858063,-77.286186
+chasch,124,"Chain Bridge Rd at School St",,38.837342,-77.312005
+oldhom,98,"Old Pickett Road at Home Depot",,38.86305,-77.274759
+orcbev,167,"Orchard St at Bevan Dr",,38.861483,-77.324983
+nutbar,181,"Nutley St at Barrick St",,38.867057,-77.26231
+judpage,154,"Judicial Dr at Page Ave",,38.846161,-77.314805
+leehil,159,"Lee Highway at Hilltop Shopping Center",,38.852329,-77.328167
+maiche,82,"Main St at Chesnut St",,38.852255,-77.322994
+maitra,44,"Main Street and Trapp Road",,38.842263,-77.281159
+eatchain,17,"Eaton Pl at Chain Bridge Rd",,38.861257,-77.306501
+blakin,57,"Blake Lane at Lindenbrook Street",,38.869321,-77.277501
+judwes,153,"Judicial Dr at Court House",,38.843595,-77.311422
+maieas,37,"Main St at East St",,38.845178,-77.302035
+jermku,75,"Jermantown Rd at Kutner Park",,38.858097,-77.330666
+leemcl,172,"Fairfax Blvd at McLean Ave",,38.856954,-77.311052
+nutlee,182,"Nutley Street and Lee Highway",,38.8741,-77.263778
+eatcha,135,"Eaton Place at Best Western Hotel",,38.861136,-77.306387
+leeaut,7,"Lee Highway at Blake Ln",,38.866441,-77.274341
+chorch,18,"Chain Bridge Rd at Orchard St",,38.859822,-77.30759
+leeoak,146,"Old Lee Highway at Great Oak Dr",,38.860002,-77.281451
+jermai,163,"Jermantown Rd at Main St",,38.855502,-77.332504
+nutlleeh,198,"Nutley Street at Pan Am Shopping",,38.870801,-77.263199
+eatoff,15,"Eaton Place at Office Park",,38.861001,-77.301575
+maited,112,"Main St at Tedrich Blvd",,38.843943,-77.292503
+picfox,53,"Old Pickett Rd at Foxcroft Apts",,38.86288,-77.273091
+leehnutl,197,"Nutley Street at Pan Am Shopping",,38.871397,-77.262904
+cousut_o,2,"Country Creek at Village Spring Lane",,38.878371,-77.278382
+leegui,80,"Lee Highway at Guitar Center",,38.852013,-77.32882
+bevwar,195,"Warwick Ave and Bevan Drive",,38.859243,-77.325879
+leebroo,148,"Old Lee Highway at Brookwood Dr",,38.856562,-77.289417
+blafiv_o,3,"Blake Ln at Five Oaks Rd",,38.873563,-77.281883
+picjlts,99,"Old Pickett Road at J.L. Tree Service",,38.862741,-77.272933
+102lee,137,"Fairfax Blvd at 10201 Block",,38.861342,-77.297391
+chaarm,127,"Chain Bridge Rd at Armstrong St",,38.841723,-77.309362
+arlingpick_o,186,"Fairfax Blvd and Pickett Road",,38.86505,-77.270935
+unifir,119,"University Dr at Fire Station No.3",,38.843514,-77.306329
+chaino,125,"Chain Bridge Rd at INOVA",,38.838531,-77.31159
+drabee,177,"Draper Dr at Beech Dr",,38.866611,-77.281155
+leelib,192,"Old Lee Highway at Library",,38.846913,-77.303417
+faieat,190,"Eaton Place and Fairfax Blvd",,38.860936,-77.302014
+unisag,118,"University Dr at Sager Ave",,38.844951,-77.305772
+chamai,129,"Chain Bridge Rd at Main St",,38.845893,-77.30669

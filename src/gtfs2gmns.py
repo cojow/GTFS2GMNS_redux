@@ -6,14 +6,221 @@ import datetime
 import numpy as np
 import pandas as pd
 import time
+from datetime import datetime
+
 
 pd.set_option('display.max_columns', 100)
 pd.set_option('display.max_rows', 100)
 
+
+""" ------------------functions------------------ """
+
+def _stop_sequence_label(trip_stop_time_df):
+    trip_stop_time_df = trip_stop_time_df.sort_values(by=['stop_sequence'])
+    trip_stop_time_df['stop_sequence_label'] = ';'.join(
+        np.array(trip_stop_time_df.stop_sequence).astype(str))
+    return trip_stop_time_df
+
+
+def _split_ignore_separators_in_quoted(s, separator=',', quote_mark='"'):
+    result = []
+    quoted = False
+    current = ''
+    for i in range(len(s)):
+        if quoted:
+            current += s[i]
+            if s[i] == quote_mark:
+                quoted = False
+            continue
+        if s[i] == separator:
+            result.append(current.strip())
+            current = ''
+        else:
+            current += s[i]
+            if s[i] == quote_mark:
+                quoted = True
+    result.append(current)
+    return result
+
+
+def _reading_text(filename: str) -> pd.DataFrame:
+    file_path = filename + '.txt'
+    data = []
+    with open(file_path, 'r', encoding='utf-8-sig') as f:
+        lines = f.readlines()
+        first_line = lines[0].split('\n')[0].split(',')
+        for line in lines:
+            if len(line.split('\n')[0].split(',')) == len(first_line):
+                data.append(line.split('\n')[0].split(','))
+            else:
+                data.append(_split_ignore_separators_in_quoted(line))
+    data_frame = pd.DataFrame(data[1:], columns=data[0])
+    return data_frame
+
+
+def _determine_terminal_flag(trip_stop_time_df):
+    trip_stop_time_df.stop_sequence = trip_stop_time_df.stop_sequence.astype(
+        'int32')
+    start_stop_seq = int(trip_stop_time_df.stop_sequence.min())
+    end_stop_seq = int(trip_stop_time_df.stop_sequence.max())
+    #  convert string to integer
+    trip_stop_time_df['terminal_flag'] = \
+        ((trip_stop_time_df.stop_sequence == start_stop_seq) |
+         (trip_stop_time_df.stop_sequence == end_stop_seq)).astype('int32')
+    return trip_stop_time_df
+
+
+def _allowed_use_function(route_type):
+    #  convert route type to node type on service network
+    allowed_use = ""
+    if int(route_type) == 0:
+        # tram
+        allowed_use = "w_bus_only;w_bus_metro;d_bus_only;d_bus_metro"
+    if int(route_type) == 1:
+        # metro
+        allowed_use = "w_metro_only;w_bus_metro;d_metro_only;d_bus_metro"
+    if int(route_type) == 2:
+        # rail
+        allowed_use = "w_rail_only;d_rail_only"
+    if int(route_type) == 3:
+        # bus
+        allowed_use = "w_bus_only;w_bus_metro;d_bus_only;d_bus_metro"
+    return allowed_use
+
+
+def _allowed_use_transferring(node_type_1, node_type_2):
+    if (node_type_1 == 'stop') & (node_type_2 == 'stop'):
+        allowed_use = "w_bus_only;d_bus_only"
+    elif (node_type_1 == 'stop') & (node_type_2 == 'metro_station'):
+        allowed_use = "w_bus_metro;d_bus_metro"
+    elif (node_type_1 == 'metro_station') & (node_type_2 == 'stop'):
+        allowed_use = "w_bus_metro;d_bus_metro"
+    elif (node_type_1 == 'metro_station') & (node_type_2 == 'metro_station'):
+        allowed_use = "w_metro_only;d_metro_only"
+    elif (node_type_1 == 'rail_station') & (node_type_2 == 'rail_station'):
+        allowed_use = "w_rail_only;d_rail_only"
+    else:
+        allowed_use = "closed"
+
+    return allowed_use
+
+
+def _transferring_penalty(node_type_1, node_type_2):
+    if (node_type_1 == 'stop') & (node_type_2 == 'stop'):
+        VDF_penalty1 = 99
+    elif (node_type_1 == 'stop') & (node_type_2 == 'metro_station'):
+        VDF_penalty1 = 0
+    elif (node_type_1 == 'metro_station') & (node_type_2 == 'stop'):
+        VDF_penalty1 = 0
+    elif (node_type_1 == 'metro_station') & (node_type_2 == 'metro_station'):
+        VDF_penalty1 = 99
+    elif (node_type_1 == 'rail_station') & (node_type_2 == 'rail_station'):
+        VDF_penalty1 = 99
+    else:
+        VDF_penalty1 = 1000
+
+    return VDF_penalty1
+
+
+def _convert_route_type_to_node_type_p(route_type):
+    #  convert route type to node type on physical network
+    node_type = ""
+    if int(route_type) == 0:
+        # tram
+        node_type = 'stop'
+    if int(route_type) == 1:
+        # metro
+        node_type = 'metro_station'
+    if int(route_type) == 2:
+        # rail
+        node_type = 'rail_station'
+    if int(route_type) == 3:
+        # bus
+        node_type = 'stop'
+    return node_type
+
+
+def _convert_route_type_to_node_type_s(route_type):
+    #  convert route type to node type on service network
+    node_type = ""
+    if int(route_type) == 0:
+        # tram
+        node_type = 'tram_service_node'
+    if int(route_type) == 1:
+        # metro
+        node_type = 'metro_service_node'
+    if int(route_type) == 2:
+        # rail
+        node_type = 'rail_service_node'
+    if int(route_type) == 3:
+        # bus
+        node_type = 'bus_service_node'
+    return node_type
+
+
+def _convert_route_type_to_link_type(route_type):
+    #  convert route type to node type on service network
+    link_type = ""
+    if int(route_type) == 0:
+        # tram
+        link_type = 'tram'
+    if int(route_type) == 1:
+        # metro
+        link_type = 'metro'
+    if int(route_type) == 2:
+        # rail
+        link_type = 'rail'
+    if int(route_type) == 3:
+        # bus
+        link_type = 'bus'
+    return link_type
+
+
+
+# WGS84 transfer coordinate system to distance(mile) #xy
+def _calculate_distance_from_geometry(lon1, lat1, lon2, lat2):
+    radius = 6371
+    d_latitude = (lat2 - lat1) * math.pi / 180.0
+    d_longitude = (lon2 - lon1) * math.pi / 180.0
+
+    a = math.sin(d_latitude / 2) * math.sin(d_latitude / 2) + math.cos(lat1 * math.pi / 180.0) * math.cos(
+        lat2 * math.pi / 180.0) * math.sin(d_longitude / 2) * math.sin(d_longitude / 2)
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    # distance = radius * c * 1000 / 1609.34  # mile
+    distance = radius * c * 1000  # meter
+    return distance
+
+
+def _hhmm_to_minutes(time_period_1):
+    from_time_1 = datetime.time(
+        int(time_period_1[0:2]), int(time_period_1[2:4]))
+    to_time_1 = datetime.time(
+        int(time_period_1[-4:-2]), int(time_period_1[-2:]))
+    from_time_min_1 = from_time_1.hour * 60 + from_time_1.minute
+    to_time_min_1 = to_time_1.hour * 60 + to_time_1.minute
+    return from_time_min_1, to_time_min_1
+
+
+
+
 """-------------------main steps------------------"""
 
 
-def reading_data(gtfs_path):
+# A decorator to measure the time of a function
+def func_running_time(func):
+    def inner(*args, **kwargs):
+        print(f'INFO Begin to run function: {func.__name__} …')
+        time_start = datetime.now()
+        res = func(*args, **kwargs)
+        time_diff = datetime.now() - time_start
+        print(f'INFO Finished running function: {func.__name__}, total: {time_diff.seconds}s')
+        print()
+        return res
+    return inner
+
+
+def reading_data(gtfs_path) -> list:
+    
     print('start reading input GTFS files...')
     agency_df = _reading_text(gtfs_path + os.sep + 'agency')
     agency_name = agency_df['agency_name'][0]
@@ -420,188 +627,6 @@ def create_transferring_links(all_node_df, all_link_list):
     return all_link_list
 
 
-""" ------------------functions------------------ """
-
-
-def _stop_sequence_label(trip_stop_time_df):
-    trip_stop_time_df = trip_stop_time_df.sort_values(by=['stop_sequence'])
-    trip_stop_time_df['stop_sequence_label'] = ';'.join(np.array(trip_stop_time_df.stop_sequence).astype(str))
-    return trip_stop_time_df
-
-
-def _reading_text(filename):
-    file_path = filename + '.txt'
-    data = []
-    with open(file_path, 'r', encoding='utf-8-sig') as f:
-        lines = f.readlines()
-        first_line = lines[0].split('\n')[0].split(',')
-        for line in lines:
-            if len(line.split('\n')[0].split(',')) == len(first_line):
-                data.append(line.split('\n')[0].split(','))
-            else:
-                data.append(_split_ignore_separators_in_quoted(line))
-    data_frame = pd.DataFrame(data[1:], columns=data[0])
-    return data_frame
-
-
-def _determine_terminal_flag(trip_stop_time_df):
-    trip_stop_time_df.stop_sequence = trip_stop_time_df.stop_sequence.astype('int32')
-    start_stop_seq = int(trip_stop_time_df.stop_sequence.min())
-    end_stop_seq = int(trip_stop_time_df.stop_sequence.max())
-    #  convert string to integer
-    trip_stop_time_df['terminal_flag'] = \
-        ((trip_stop_time_df.stop_sequence == start_stop_seq) |
-         (trip_stop_time_df.stop_sequence == end_stop_seq)).astype('int32')
-    return trip_stop_time_df
-
-
-def _allowed_use_function(route_type):
-    #  convert route type to node type on service network
-    allowed_use = ""
-    if int(route_type) == 0:
-        # tram
-        allowed_use = "w_bus_only;w_bus_metro;d_bus_only;d_bus_metro"
-    if int(route_type) == 1:
-        # metro
-        allowed_use = "w_metro_only;w_bus_metro;d_metro_only;d_bus_metro"
-    if int(route_type) == 2:
-        # rail
-        allowed_use = "w_rail_only;d_rail_only"
-    if int(route_type) == 3:
-        # bus
-        allowed_use = "w_bus_only;w_bus_metro;d_bus_only;d_bus_metro"
-    return allowed_use
-
-
-def _allowed_use_transferring(node_type_1, node_type_2):
-    if (node_type_1 == 'stop') & (node_type_2 == 'stop'):
-        allowed_use = "w_bus_only;d_bus_only"
-    elif (node_type_1 == 'stop') & (node_type_2 == 'metro_station'):
-        allowed_use = "w_bus_metro;d_bus_metro"
-    elif (node_type_1 == 'metro_station') & (node_type_2 == 'stop'):
-        allowed_use = "w_bus_metro;d_bus_metro"
-    elif (node_type_1 == 'metro_station') & (node_type_2 == 'metro_station'):
-        allowed_use = "w_metro_only;d_metro_only"
-    elif (node_type_1 == 'rail_station') & (node_type_2 == 'rail_station'):
-        allowed_use = "w_rail_only;d_rail_only"
-    else:
-        allowed_use = "closed"
-
-    return allowed_use
-
-
-def _transferring_penalty(node_type_1, node_type_2):
-    if (node_type_1 == 'stop') & (node_type_2 == 'stop'):
-        VDF_penalty1 = 99
-    elif (node_type_1 == 'stop') & (node_type_2 == 'metro_station'):
-        VDF_penalty1 = 0
-    elif (node_type_1 == 'metro_station') & (node_type_2 == 'stop'):
-        VDF_penalty1 = 0
-    elif (node_type_1 == 'metro_station') & (node_type_2 == 'metro_station'):
-        VDF_penalty1 = 99
-    elif (node_type_1 == 'rail_station') & (node_type_2 == 'rail_station'):
-        VDF_penalty1 = 99
-    else:
-        VDF_penalty1 = 1000
-
-    return VDF_penalty1
-
-
-def _convert_route_type_to_node_type_p(route_type):
-    #  convert route type to node type on physical network
-    node_type = ""
-    if int(route_type) == 0:
-        # tram
-        node_type = 'stop'
-    if int(route_type) == 1:
-        # metro
-        node_type = 'metro_station'
-    if int(route_type) == 2:
-        # rail
-        node_type = 'rail_station'
-    if int(route_type) == 3:
-        # bus
-        node_type = 'stop'
-    return node_type
-
-
-def _convert_route_type_to_node_type_s(route_type):
-    #  convert route type to node type on service network
-    node_type = ""
-    if int(route_type) == 0:
-        # tram
-        node_type = 'tram_service_node'
-    if int(route_type) == 1:
-        # metro
-        node_type = 'metro_service_node'
-    if int(route_type) == 2:
-        # rail
-        node_type = 'rail_service_node'
-    if int(route_type) == 3:
-        # bus
-        node_type = 'bus_service_node'
-    return node_type
-
-
-def _convert_route_type_to_link_type(route_type):
-    #  convert route type to node type on service network
-    link_type = ""
-    if int(route_type) == 0:
-        # tram
-        link_type = 'tram'
-    if int(route_type) == 1:
-        # metro
-        link_type = 'metro'
-    if int(route_type) == 2:
-        # rail
-        link_type = 'rail'
-    if int(route_type) == 3:
-        # bus
-        link_type = 'bus'
-    return link_type
-
-
-def _split_ignore_separators_in_quoted(s, separator=',', quote_mark='"'):
-    result = []
-    quoted = False
-    current = ''
-    for i in range(len(s)):
-        if quoted:
-            current += s[i]
-            if s[i] == quote_mark:
-                quoted = False
-            continue
-        if s[i] == separator:
-            result.append(current.strip())
-            current = ''
-        else:
-            current += s[i]
-            if s[i] == quote_mark:
-                quoted = True
-    result.append(current)
-    return result
-
-
-def _calculate_distance_from_geometry(lon1, lat1, lon2, lat2):  # WGS84 transfer coordinate system to distance(mile) #xy
-    radius = 6371
-    d_latitude = (lat2 - lat1) * math.pi / 180.0
-    d_longitude = (lon2 - lon1) * math.pi / 180.0
-
-    a = math.sin(d_latitude / 2) * math.sin(d_latitude / 2) + math.cos(lat1 * math.pi / 180.0) * math.cos(
-        lat2 * math.pi / 180.0) * math.sin(d_longitude / 2) * math.sin(d_longitude / 2)
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
-    # distance = radius * c * 1000 / 1609.34  # mile
-    distance = radius * c * 1000  # meter
-    return distance
-
-
-def _hhmm_to_minutes(time_period_1):
-    from_time_1 = datetime.time(int(time_period_1[0:2]), int(time_period_1[2:4]))
-    to_time_1 = datetime.time(int(time_period_1[-4:-2]), int(time_period_1[-2:]))
-    from_time_min_1 = from_time_1.hour * 60 + from_time_1.minute
-    to_time_min_1 = to_time_1.hour * 60 + to_time_1.minute
-    return from_time_min_1, to_time_min_1
-
 
 """ ------------------main functions------------------ """
 
@@ -695,7 +720,3 @@ if __name__ == '__main__':
     period_start_time, period_end_time = _hhmm_to_minutes(time_period)
 
     gtfs2gmns(input_gtfs_path, output_gmns_path)
-
-
-
-
