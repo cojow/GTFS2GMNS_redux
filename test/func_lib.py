@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 
 
-def _reading_text(filename: str) -> pd.DataFrame:
+def reading_text(filename: str) -> pd.DataFrame:
     file_path = f'{filename}.txt'
 
     data = []
@@ -27,14 +27,14 @@ def _reading_text(filename: str) -> pd.DataFrame:
     return data_frame
 
 
-def _stop_sequence_label(trip_stop_time_df: pd.DataFrame) -> pd.DataFrame:
+def stop_sequence_label(trip_stop_time_df: pd.DataFrame) -> pd.DataFrame:
     trip_stop_time_df = trip_stop_time_df.sort_values(by=['stop_sequence'])
     trip_stop_time_df['stop_sequence_label'] = ';'.join(
         np.array(trip_stop_time_df.stop_sequence).astype(str))
     return trip_stop_time_df
 
 
-def _split_ignore_separators_in_quoted(s: str, separator: str = ',', quote_mark: str = '"') -> list:
+def split_ignore_separators_in_quoted(s: str, separator: str = ',', quote_mark: str = '"') -> list:
     result = []
     quoted = False
     current = ''
@@ -55,7 +55,7 @@ def _split_ignore_separators_in_quoted(s: str, separator: str = ',', quote_mark:
     return result
 
 
-def _determine_terminal_flag(trip_stop_time_df: pd.DataFrame) -> pd.DataFrame:
+def determine_terminal_flag(trip_stop_time_df: pd.DataFrame) -> pd.DataFrame:
     trip_stop_time_df.stop_sequence = trip_stop_time_df.stop_sequence.astype(
         'int32')
     start_stop_seq = int(trip_stop_time_df.stop_sequence.min())
@@ -68,7 +68,7 @@ def _determine_terminal_flag(trip_stop_time_df: pd.DataFrame) -> pd.DataFrame:
     return trip_stop_time_df
 
 
-def _allowed_use_function(route_type: str) -> str:
+def allowed_use_function(route_type: str) -> str:
     #  convert route type to node type on service network: 0:tram, 1:metro, 2:rail, 3:bus
     allowed_use_dict = {0: "w_bus_only;w_bus_metro;d_bus_only;d_bus_metro",
                         1: "w_metro_only;w_bus_metro;d_metro_only;d_bus_metro",
@@ -77,7 +77,7 @@ def _allowed_use_function(route_type: str) -> str:
     return allowed_use_dict.get(int(route_type), "")
 
 
-def _allowed_use_transferring(node_type_1: str, node_type_2: str) -> str:
+def allowed_use_transferring(node_type_1: str, node_type_2: str) -> str:
     if (node_type_1 == 'stop') & (node_type_2 == 'stop'):
         return "w_bus_only;d_bus_only"
     elif (node_type_1 == 'stop') & (node_type_2 == 'metro_station'):
@@ -92,7 +92,7 @@ def _allowed_use_transferring(node_type_1: str, node_type_2: str) -> str:
         return "closed"
 
 
-def _transferring_penalty(node_type_1: str, node_type_2: str) -> int:
+def transferring_penalty(node_type_1: str, node_type_2: str) -> int:
     if (node_type_1 == 'stop') & (node_type_2 == 'stop'):
         return 99
     elif (node_type_1 == 'stop') & (node_type_2 == 'metro_station'):
@@ -107,26 +107,26 @@ def _transferring_penalty(node_type_1: str, node_type_2: str) -> int:
         return 1000
 
 
-def _convert_route_type_to_node_type_p(route_type: str) -> str:
+def convert_route_type_to_node_type_p(route_type: str) -> str:
     #  convert route type to node type on physical network: 0:tram, 1:metro, 2:rail, 3:bus
     node_type_dict = {0: 'stop', 1: 'metro_station', 2: 'rail_station', 3: 'stop'}
     return node_type_dict.get(int(route_type), "")
 
 
-def _convert_route_type_to_node_type_s(route_type: str) -> str:
+def convert_route_type_to_node_type_s(route_type: str) -> str:
     #  convert route type to node type on service network: 0:tram, 1:metro, 2:rail, 3:bus
     node_type_dict = {0: "tram_service_nide", 1: "metro_service_node", 2: "rail_service_node", 3: "bus_service_node"}
     return node_type_dict.get(int(route_type), "")
 
 
-def _convert_route_type_to_link_type(route_type: str) -> str:
+def convert_route_type_to_link_type(route_type: str) -> str:
     #  convert route type to node type on service network
     route_type_dict = {0: 'tram', 1: 'metro', 2: 'rail', 3: 'bus'}
     return route_type_dict.get(int(route_type), '')
 
 
 # WGS84 transfer coordinate system to distance(mile) #xy
-def _calculate_distance_from_geometry(lon1: float, lat1: float, lon2: float, lat2: float) -> float:
+def calculate_distance_from_geometry(lon1: float, lat1: float, lon2: float, lat2: float) -> float:
     radius = 6371
     d_latitude = (lat2 - lat1) * math.pi / 180.0
     d_longitude = (lon2 - lon1) * math.pi / 180.0
@@ -140,7 +140,7 @@ def _calculate_distance_from_geometry(lon1: float, lat1: float, lon2: float, lat
     return distance
 
 
-def _hhmm_to_minutes(time_period_1: str) -> list:
+def hhmm_to_minutes(time_period_1: str) -> list:
     from_time_1 = datetime.time(int(time_period_1[:2]), int(time_period_1[2:4]))
     to_time_1 = datetime.time(int(time_period_1[-4:-2]), int(time_period_1[-2:]))
 

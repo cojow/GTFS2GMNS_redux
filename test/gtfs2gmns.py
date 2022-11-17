@@ -19,17 +19,17 @@ sys.path.append(str(base_dir))
 
 from utility_lib import func_running_time, get_txt_files_from_folder, check_required_files_exist, path2linux
 
-from func_lib import (_reading_text,
-                      _hhmm_to_minutes,
-                      _determine_terminal_flag,
-                      _stop_sequence_label,
-                      _convert_route_type_to_node_type_p,
-                      _convert_route_type_to_node_type_s,
-                      _convert_route_type_to_link_type,
-                      _calculate_distance_from_geometry,
-                      _allowed_use_function,
-                      _transferring_penalty,
-                      _allowed_use_transferring)
+from func_lib import (reading_text,
+                      hhmm_to_minutes,
+                      determine_terminal_flag,
+                      stop_sequence_label,
+                      convert_route_type_to_node_type_p,
+                      convert_route_type_to_node_type_s,
+                      convert_route_type_to_link_type,
+                      calculate_distance_from_geometry,
+                      allowed_use_function,
+                      transferring_penalty,
+                      allowed_use_transferring)
 
 
 class GTFS2GMNS:
@@ -46,7 +46,7 @@ class GTFS2GMNS:
         self.time_period = time_period
         self.gtfs_result_dir = gtfs_result_dir
 
-        self.period_start_time, self.period_end_time = _hhmm_to_minutes(self.time_period)
+        self.period_start_time, self.period_end_time = hhmm_to_minutes(self.time_period)
         self.required_files = ['agency.txt', 'stops.txt', 'routes.txt', 'trips.txt', 'stop_times.txt']
 
     @func_running_time
@@ -160,8 +160,8 @@ class GTFS2GMNS:
             if mask1 and mask2:
                 input_list.append(trip_stop_time_df)
 
-        intermediate_output_list = list(map(_determine_terminal_flag, input_list))
-        output_list = list(map(_stop_sequence_label, intermediate_output_list))
+        intermediate_output_list = list(map(determine_terminal_flag, input_list))
+        output_list = list(map(stop_sequence_label, intermediate_output_list))
         print(f'Info: add terminal_flag for trips using CPU time:{time.time() - time_start} s \n')
 
         time_start = time.time()
@@ -225,7 +225,7 @@ class GTFS2GMNS:
         physical_node_df['route_type'] = temp_df['route_type']
         physical_node_df['route_id'] = temp_df['route_id']
         physical_node_df['node_type'] = \
-            physical_node_df.apply(lambda x: _convert_route_type_to_node_type_p(x.route_type), axis=1)
+            physical_node_df.apply(lambda x: convert_route_type_to_node_type_p(x.route_type), axis=1)
         physical_node_df['directed_route_id'] = ""
         physical_node_df['directed_service_id'] = ""
         physical_node_df['zone_id'] = ""
@@ -254,7 +254,7 @@ class GTFS2GMNS:
         service_node_df['route_type'] = temp_df['route_type']
         service_node_df['route_id'] = temp_df['route_id']
         service_node_df['node_type'] = \
-            service_node_df.apply(lambda x: _convert_route_type_to_node_type_s(x.route_type), axis=1)
+            service_node_df.apply(lambda x: convert_route_type_to_node_type_s(x.route_type), axis=1)
         # node_csv['terminal_flag'] = ' '
         service_node_df['directed_route_id'] = temp_df['directed_route_id'].astype(str)
         service_node_df['directed_service_id'] = temp_df['directed_service_id'].astype(str)
@@ -303,7 +303,7 @@ class GTFS2GMNS:
                     link_id = 1000000 + number_of_route_links + 1
                     from_node_id = node_id_dict[one_line_df.iloc[k].directed_service_stop_id]
                     to_node_id = node_id_dict[one_line_df.iloc[k + 1].directed_service_stop_id]
-                    facility_type = _convert_route_type_to_link_type(one_line_df.iloc[k].route_type)
+                    facility_type = convert_route_type_to_link_type(one_line_df.iloc[k].route_type)
                     dir_flag = 1
                     directed_route_id = one_line_df.iloc[k].directed_route_id
                     link_type = 1
@@ -312,7 +312,7 @@ class GTFS2GMNS:
                     from_node_lat = float(one_line_df.iloc[k].stop_lat)
                     to_node_lon = float(one_line_df.iloc[k + 1].stop_lon)
                     to_node_lat = float(one_line_df.iloc[k + 1].stop_lat)
-                    length = _calculate_distance_from_geometry(from_node_lon, from_node_lat, to_node_lon, to_node_lat)
+                    length = calculate_distance_from_geometry(from_node_lon, from_node_lat, to_node_lon, to_node_lat)
                     lanes = number_of_trips
                     capacity = 999999
                     VDF_fftt1 = one_line_df.iloc[k + 1].arrival_time - one_line_df.iloc[k].arrival_time
@@ -327,7 +327,7 @@ class GTFS2GMNS:
                     geometry = 'LINESTRING (' + str(from_node_lon) + ' ' + str(from_node_lat) + ', ' + \
                             str(to_node_lon) + ' ' + str(to_node_lat) + ')'
                     agency_name = one_line_df.agency_name[0]
-                    allowed_use = _allowed_use_function(one_line_df.iloc[k].route_type)
+                    allowed_use = allowed_use_function(one_line_df.iloc[k].route_type)
                     stop_sequence = one_line_df.iloc[k].stop_sequence
                     directed_service_id = one_line_df.iloc[k].directed_service_id
                     link_list = [link_id, from_node_id, to_node_id, facility_type, dir_flag, directed_route_id,
@@ -352,7 +352,7 @@ class GTFS2GMNS:
             link_id = 1000000 + number_of_route_links + number_of_sta2route_links
             from_node_id = row.physical_node_id
             to_node_id = row.node_id
-            facility_type = _convert_route_type_to_link_type(row.route_type)
+            facility_type = convert_route_type_to_link_type(row.route_type)
             dir_flag = 1
             directed_route_id = row.directed_route_id
             link_type = 2
@@ -361,7 +361,7 @@ class GTFS2GMNS:
             to_node_lat = row.y_coord
             from_node_lon = node_lon_dict[row.physical_node_id]
             from_node_lat = node_lat_dict[row.physical_node_id]
-            length = _calculate_distance_from_geometry(from_node_lon, from_node_lat, to_node_lon, to_node_lat)
+            length = calculate_distance_from_geometry(from_node_lon, from_node_lat, to_node_lon, to_node_lat)
             free_speed = 2
             lanes = 1
             capacity = 999999
@@ -375,7 +375,7 @@ class GTFS2GMNS:
             geometry = 'LINESTRING (' + str(from_node_lon) + ' ' + str(from_node_lat) + ', ' + \
                     str(to_node_lon) + ' ' + str(to_node_lat) + ')'
             agency_name = row.agency_name
-            allowed_use = _allowed_use_function(row.route_type)
+            allowed_use = allowed_use_function(row.route_type)
 
             # inbound links (boarding)
 
@@ -449,7 +449,7 @@ class GTFS2GMNS:
                 from_node_lat = float(physical_node_df.iloc[i].y_coord)
                 to_node_lon = float(neighboring_node_df.iloc[j].x_coord)
                 to_node_lat = float(neighboring_node_df.iloc[j].y_coord)
-                length = _calculate_distance_from_geometry(from_node_lon, from_node_lat, to_node_lon, to_node_lat)
+                length = calculate_distance_from_geometry(from_node_lon, from_node_lat, to_node_lon, to_node_lat)
                 if (length > 321.869) | (length < 1):
                     continue
                 if (neighboring_node_df.iloc[j].route_id, neighboring_node_df.iloc[j].agency_name) in labeled_list:
@@ -475,14 +475,13 @@ class GTFS2GMNS:
                 # 1 kilo/hour
                 VDF_alpha1 = 0.15
                 VDF_beta1 = 4
-                VDF_penalty1 = _transferring_penalty(physical_node_df.iloc[i].node_type, neighboring_node_df.iloc[j].node_type)
+                VDF_penalty1 = transferring_penalty(physical_node_df.iloc[i].node_type, neighboring_node_df.iloc[j].node_type)
                 # penalty of transferring
                 cost = 60
                 geometry = 'LINESTRING (' + str(from_node_lon) + ' ' + str(from_node_lat) + ', ' + \
                         str(to_node_lon) + ' ' + str(to_node_lat) + ')'
                 agency_name = ""
-                allowed_use = \
-                    _allowed_use_transferring(physical_node_df.iloc[i].node_type, neighboring_node_df.iloc[j].node_type)
+                allowed_use = allowed_use_transferring(physical_node_df.iloc[i].node_type, neighboring_node_df.iloc[j].node_type)
                 stop_sequence = ""
                 directed_service_id = ""
                 link_list = [link_id, from_node_id, to_node_id, facility_type, dir_flag, directed_route_id,
