@@ -1,0 +1,2 @@
+agency_id,agency_url,agency_lang,agency_name,agency_phone,agency_timezone,agency_fare_url,tts_agency_name
+64,http://cottonwoodaz.gov/cat.php,en,Cottonwood Area Transit,(928) 634-2287,America/Phoenix,http://cottonwoodaz.gov/cat.php,

@@ -1,0 +1,7 @@
+agency_id,route_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color,route_sort_order,min_headway_minutes,eligibility_restricted,continuous_pickup,continuous_drop_off,tts_route_short_name,tts_route_long_name
+64,719,1,Blue,From Cottonwood Library to Verde Villages and back to the Library. About 45 minute loop.,3,http://www.ride-cat.com,3e6ca3,ffffff,0,45,0,1,1,,
+64,720,2,Red,"Library, Yavapai College, Clarkdale, Old Town Cottonwood.",3,http://www.ride-cat.com,d01f25,ffffff,1,45,0,1,1,,
+64,1148,3,Yellow,Blue Route shortened to take advantage of new businesses,3,http://www.ride-cat.com,f99d1c,ffffff,2,45,0,1,1,,
+64,1149,4,Green,Retail route from Old Town to Walmart,3,http://www.ride-cat.com,28a048,ffffff,3,45,0,1,1,,
+64,304,,Verde Shuttle,"Commuter route to Sedona. Includes West Sedona, Uptown, and South Sedona to Poco Diablo Resort. Primary Route.",3,https://verdeshuttle.com/routes/verde-shuttle/,336b3b,ffffff,4,120,0,1,1,,
+64,16785,CAT,CAT Connect Shuttle,,3,,00befd,000000,5,,0,1,1,,
