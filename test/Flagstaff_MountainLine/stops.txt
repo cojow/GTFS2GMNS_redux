@@ -1,0 +1,181 @@
+stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,zone_id,stop_url,location_type,parent_station,stop_timezone,wheelchair_boarding
+1,1,Beaver / Phoenix,Beaver St. / Phoenix Ave. (Stop Code: 001) ,35.197185,-111.65068,1,,,,America/Phoenix,1
+3,3,Beaver / Franklin SB,Beaver St. / Franklin Ave. (Biological Sciences) Southbound (Stop Code: 003) ,35.191271,-111.65325,1,,,,America/Phoenix,1
+4,4,Beaver (Gillenwater),Beaver St. (Gillenwater Hall) (Stop Code: 004) ,35.188271,-111.654381,1,,,,America/Phoenix,1
+5,5,University (Wilson),University Dr. (Wilson Hall) (Stop Code: 005) ,35.18519,-111.65551,1,,,,America/Phoenix,1
+6,6,Knoles (Campus Heights) SB,Knoles Dr. (Campus Heights) (Stop Code: 006) ,35.18233,-111.65698,1,,,,America/Phoenix,1
+7,7,McConnell (SBS) WB,McConnell Dr. (Social & Behavioral Sciences) (Stop Code: 007) ,35.178644,-111.657984,1,,,,America/Phoenix,1
+8,8,Beulah (Wal-Mart),Beulah Blvd. (Wal-Mart) (Stop Code: 008) ,35.175041,-111.663603,1,,,,America/Phoenix,1
+9,9,Forest Meadows (Shell),Forest Meadows St. (Shell One Stop) (Stop Code: 009) ,35.179092,-111.668907,1,,,,America/Phoenix,1
+10,10,Forest Meadows (Apts.),Forest Meadows St. (Forest Meadows Apts.) (Stop Code: 010) ,35.18163,-111.67075,1,,,,America/Phoenix,1
+12,12,Woodlands Village,Woodlands Village Blvd. (Old Harkins Theatre) (Stop Code: 012),35.18328,-111.66843,1,,,,America/Phoenix,1
+13,13,Beulah / McConnell,Beulah Blvd. / McConnell Dr. (Olive Garden / Red Lobster) (Stop Code: 013) ,35.176404,-111.662931,1,,,,America/Phoenix,1
+14,14,McConnell (SBS) EB,McConnell Dr. (Social & Behavioral Sciences) (Stop Code: 014) ,35.178645,-111.658419,1,,,,America/Phoenix,1
+15,15,Knoles (Campus Heights) NB,Knoles Dr. (Campus Heights) (Stop Code: 015) ,35.18287,-111.65694,1,,,,America/Phoenix,1
+16,16,University (Reilly),University Dr. (Reilly Hall) (Stop Code: 016) ,35.18508,-111.65455,1,,,,America/Phoenix,1
+17,17,Beaver (NAU Bookstore),Beaver St. (NAU Bookstore) (Stop Code: 017) ,35.188424,-111.654192,1,,,,America/Phoenix,1
+18,18,Beaver / Franklin NB,Beaver St. / Franklin Ave. (Biological Sciences) Northbound (Stop Code: 018) ,35.191254,-111.6531,1,,,,America/Phoenix,1
+20,20,San Francisco / Benton,San Francisco St. / Benton Ave. (Stop Code: 020) ,35.19459,-111.649271,1,,,,America/Phoenix,2
+22,22,Cherry / Leroux,Cherry Ave. / Leroux St. (Stop Code: 022) ,35.20031,-111.64771,1,,,,America/Phoenix,2
+24,24,Downtown Connection Center,Downtown Connection Center (Stop Code: 024) ,35.197277,-111.65262,1,,,,America/Phoenix,1
+25,25,Route 66 / Switzer,Rt. 66 / Switzer Canyon Dr. (Stop Code: 025) ,35.193621,-111.634687,1,,,,America/Phoenix,1
+26,26,Route 66 / Ponderosa EB,Rt. 66 / Ponderosa Pkwy (Stop Code: 026),35.195601,-111.626409,1,,,,America/Phoenix,1
+27,27,Route 66 / Arrowhead EB,Rt. 66 / Arrowhead Ave. (Stop Code: 027) ,35.200612,-111.617961,1,,,,America/Phoenix,1
+28,28,Route 66 / Fourth EB,Rt. 66 / Fourth St. (Stop Code: 028) ,35.206421,-111.612623,1,,,,America/Phoenix,1
+29,29,Route 66 / Steves,Rt. 66 / Steves Blvd. (Stop Code: 029) ,35.210033,-111.606095,1,,,,America/Phoenix,1
+30,30,Route 66 / Fanning,Rt. 66 / Fanning Dr. (Stop Code: 030) ,35.215833,-111.595033,1,,,,America/Phoenix,1
+31,31,Route 66 / Country Club,Rt. 66 / Country Club & FUTS Trail (Stop Code: 031) ,35.222024,-111.586499,1,,,,America/Phoenix,1
+32,32,Highway 89 / Smokerise,N. 89 / Smokerise Dr. (Maverick) (Stop Code: 032) ,35.233833,-111.575417,1,,,,America/Phoenix,1
+33,33,Christmas Tree / Snowflake,Christmas Tree Ln / Snowflake Dr. (Stop Code: 033) ,35.238969,-111.573353,1,,,,America/Phoenix,1
+34,34,Winter / Christmas Tree,Winter Dr. / Christmas Tree Ln. (Stop Code: 034) ,35.235383,-111.575567,1,,,,America/Phoenix,1
+35,35,Flagstaff Mall Connection Ctr,Flagstaff Mall Connection Center (Stop Code: 035) ,35.224433,-111.578136,1,,,,America/Phoenix,1
+36,36,Route 66 / Fanning,Rt.66 / Fanning Dr. (Jack in the Box) (Stop Code: 036) ,35.216183,-111.5951,1,,,,America/Phoenix,2
+37,37,Route 66 / Steves,Rt. 66 / Steves Blvd. (Super Pawn) (Stop Code: 037) ,35.20985,-111.6068,1,,,,America/Phoenix,1
+38,38,Route 66 / Fourth WB,Rt. 66 / Fourth St. (Stop Code: 038) ,35.20687,-111.6123,1,,,,America/Phoenix,1
+39,39,Route 66 / Arrowhead WB,Rt.66 / Arrowhead Ave. (Tractor Supp.) (Stop Code: 039),35.200722,-111.61826,1,,,,America/Phoenix,1
+40,40,Route 66 / Ponderosa WB,Rt. 66 / Ponderosa Pkwy (Stop Code: 040),35.195608,-111.627024,1,,,,America/Phoenix,1
+41,41,Route 66 / Switzer,Rt. 66 / Switzer Canyon Dr. (Stop Code: 041) ,35.194181,-111.632253,1,,,,America/Phoenix,1
+42,42,Route 66 / San Francisco,Rt. 66 / San Francisco St. (Stop Code: 042),35.197181,-111.647575,1,,,,America/Phoenix,1
+44,44,San Francisco / Birch,San Francisco St. / Birch Ave. (Stop Code: 044) ,35.198683,-111.647367,1,,,,America/Phoenix,1
+45,45,San Francisco / Elm,San Francisco St. / Elm Ave (Stop Code: 045) ,35.201583,-111.646017,1,,,,America/Phoenix,1
+47,47,Forest / Turquoise EB,Forest Ave / Turquoise Dr. (Stop Code: 047) ,35.210708,-111.639531,1,,,,America/Phoenix,1
+48,48,Cedar / Gemini NB,Cedar Av. / Gemini Dr. (Stop Code: 048) ,35.21429,-111.631,1,,,,America/Phoenix,1
+49,49,Cedar / West EB,Cedar Av. / West St. (Coconino High School) (Stop Code: 049) ,35.217928,-111.620526,1,,,,America/Phoenix,1
+50,50,Cedar / Aris,Cedar Av. / Aris St. (Salvation Army Store) (Stop Code: 050) ,35.217945,-111.616317,1,,,,America/Phoenix,1
+51,51,Lockett / King EB,Lockett Rd. / King St. (Stop Code: 051) ,35.2185,-111.611425,1,,,,America/Phoenix,1
+52,52,Lockett / Alta Vista EB,Lockett Rd. / Alta Vista Dr. (Stop Code: 052) ,35.218693,-111.601619,1,,,,America/Phoenix,1
+53,53,Lockett / Fanning EB,Lockett Rd. / Fanning Dr. (Stop Code: 053) ,35.218399,-111.596094,1,,,,America/Phoenix,1
+54,54,Kaspar (NAIPTA) EB,Kaspar Dr. (NAIPTA Facility) (Stop Code: 054) ,35.217903,-111.593029,1,,,,America/Phoenix,1
+55,55,Lynch (FUTS Trail),Lynch Av. (FUTS Trail) (Stop Code: 055) ,35.22274,-111.58669,1,,,,America/Phoenix,1
+57,57,Cummings / Lynch,Cummings St. / Lynch Ave. (Stop Code: 057) ,35.224108,-111.584461,1,,,,America/Phoenix,1
+58,58,Kaspar (NAIPTA) WB,Kaspar Dr. (NAIPTA Facility) (Stop Code: 058) ,35.218311,-111.592695,1,,,,America/Phoenix,1
+59,59,Lockett / Fanning WB,Lockett Rd. / Fanning Dr. (Stop Code: 059) ,35.21844,-111.59558,1,,,,America/Phoenix,2
+60,60,Lockett / Manor,Lockett Rd. / Manor Rd. (Stop Code: 060) ,35.218496,-111.601181,1,,,,America/Phoenix,2
+61,61,Lockett / Alta Vista WB,Lockett Rd. / Alta Vista Dr. (Stop Code: 061) ,35.218478,-111.604355,1,,,,America/Phoenix,1
+62,62,Lockett / King WB,Lockett Rd. / King St. (Stop Code: 062) ,35.218448,-111.611105,1,,,,America/Phoenix,1
+63,63,Cedar / Fourth,Cedar Av./ Fourth St. (Cedar Plaza) (Stop Code: 063) ,35.218056,-111.615847,1,,,,America/Phoenix,1
+64,64,Cedar / West WB,Cedar Av. / West St. (Stop Code: 064) ,35.218084,-111.62045,1,,,,America/Phoenix,2
+65,65,Cedar / Gemini SB,Cedar Ave. / Gemini Dr. (Stop Code: 065) ,35.213346,-111.631318,1,,,,America/Phoenix,1
+66,66,Forest / Turquoise WB,Forest Av. / Turquoise Dr. (Stop Code: 066) ,35.210908,-111.639118,1,,,,America/Phoenix,1
+67,67,Beaver (Flagstaff Med Ctr) SB,Beaver St. (Flagstaff Medical Center) (Stop Code: 067) ,35.20873,-111.64528,1,,,,America/Phoenix,1
+68,68,Beaver / Hunt,Beaver St. / Hunt Ave. (Stop Code: 068) ,35.204533,-111.647217,1,,,,America/Phoenix,2
+69,69,Beaver / Birch,Beaver St. / Birch Ave. (Stop Code: 069) ,35.199872,-111.649418,1,,,,America/Phoenix,1
+71,71,Butler / San Francisco EB,Butler Ave. / San Francisco St. Eastbound (Stop Code: 071) ,35.193603,-111.650071,1,,,,America/Phoenix,1
+72,72,Butler / Elden EB,Butler Av. / Elden St. Eastbound (Stop Code: 072) ,35.192434,-111.646089,1,,,,America/Phoenix,1
+73,73,Butler / Cambridge,Butler Av. / Cambridge Ln. (Whole Foods) (Stop Code: 073),35.192451,-111.641945,1,,,,America/Phoenix,1
+74,74,Butler (Marathon),Butler Av. (Marathon) (Stop Code: 074) ,35.191728,-111.635776,1,,,,America/Phoenix,1
+75,75,Butler (Napa),Butler Av. (Napa Auto Parts) (Stop Code: 075) ,35.191559,-111.629036,1,,,,America/Phoenix,1
+76,76,Butler (Filiberto's),Butler Av. (Filiberto's) (Stop Code: 076) ,35.192066,-111.625209,1,,,,America/Phoenix,1
+77,77,Butler (Little America),Butler Ave. (Little America) (Stop Code: 077) ,35.192165,-111.617831,1,,,,America/Phoenix,1
+78,78,Foxglenn / Butler NB,Foxglenn St. / Butler Ave. (Stop Code: 078) ,35.196905,-111.598413,1,,,,America/Phoenix,2
+79,79,Soliere / Foxlair (West) EB,Soliere Av. / Foxlair Dr. (West End) (Stop Code: 079) ,35.203318,-111.605072,1,,,,America/Phoenix,2
+80,80,Soliere / Foxlair (East ) EB,Soliere Av. / Foxlair Dr. (East End) (Stop Code: 080) ,35.20681,-111.60044,1,,,,America/Phoenix,2
+81,81,Soliere / Elk Run EB,Soliere Av. / Elk Run St. (Stop Code: 081) ,35.21025,-111.595653,1,,,,America/Phoenix,2
+82,82,Soliere (Butterfield) EB,Soliere Av. (Butterfield Apts.) (Stop Code: 082) ,35.211867,-111.592717,1,,,,America/Phoenix,1
+83,83,Soliere (Timberline) EB,Soliere Av. (Timberline Place) (Stop Code: 083) ,35.213733,-111.58875,1,,,,America/Phoenix,2
+84,84,Country Club (B of A),Country Club Dr. (Bank of America ATM) (Stop Code: 084) ,35.212483,-111.577771,1,,,,America/Phoenix,1
+86,86,Soliere / Country Club,Soliere Ave. / Country Club Dr. (Stop Code: 086) ,35.2118,-111.578133,1,,,,America/Phoenix,2
+87,87,Soliere (Timberline) WB,Soliere Ave. (Timberline Place) (Stop Code: 087) ,35.213919,-111.588717,1,,,,America/Phoenix,1
+88,88,Soliere (Butterfield) WB,Soliere Av. (Butterfield Apts.) (Stop Code: 088) ,35.212128,-111.592589,1,,,,America/Phoenix,1
+89,89,Soliere / Elk Run  WB,,35.210299,-111.595883,1,,,,America/Phoenix,2
+90,90,Soliere / Foxlair (East) WB,Soliere Av. / Foxlair (East End) (Stop Code: 090) ,35.207644,-111.599647,1,,,,America/Phoenix,1
+91,91,Soliere / Foxlair (West) WB,Soliere Av. / Foxlair (West End) (Stop Code: 091) ,35.203579,-111.604937,1,,,,America/Phoenix,1
+92,92,Foxglenn / Butler SB,Foxglenn St. / Butler Ave. (Stop Code: 092) ,35.196958,-111.598826,1,,,,America/Phoenix,2
+93,93,Butler (Black Barts),Butler Ave. (Black Barts) (Stop Code: 093) ,35.192333,-111.617883,1,,,,America/Phoenix,1
+94,94,Butler / Lucky WB,Butler Ave. / Lucky Ln. (Speedway) (Stop Code: 094) ,35.192162,-111.623277,1,,,,America/Phoenix,1
+95,95,Butler (Golden Eagle),Butler Av. (Golden Eagle Dist.) (Stop Code: 095) ,35.191706,-111.629427,1,,,,America/Phoenix,1
+96,96,Butler (Builders FirstSource),Butler Av. (Builders FirstSource) (Stop Code: 096),35.19185,-111.635367,1,,,,America/Phoenix,2
+97,97,Butler / Sawmill,Butler Ave. / Sawmill Rd. (New Frontiers) (Stop Code: 097) ,35.192508,-111.64144,1,,,,America/Phoenix,1
+98,98,Butler / Elden WB,,35.192613,-111.646257,1,,,,America/Phoenix,2
+99,99,Butler / San Francisco WB,,35.19381,-111.6501,1,,,,America/Phoenix,2
+100,100,Kendrick / Benton,Kendrick St. / Benton Ave. (Stop Code: 100) ,35.19555,-111.653733,1,,,,America/Phoenix,1
+102,102,Milton / University,Milton Rd. / University Av. (Wendy's) (Stop Code: 102) ,35.184846,-111.661583,1,,,,America/Phoenix,1
+103,103,Milton / Forest Meadows,Milton Rd. / Forest Meadows St. (Stop Code: 103),35.180018,-111.661482,1,,,,America/Phoenix,2
+105,105,Lake Mary / I-17,Lake Mary Rd. / I-17 Underpass (Stop Code: 105) ,35.168115,-111.664887,1,,,,America/Phoenix,1
+106,106,Lake Mary / High Country,Lake Mary Rd. / High Country Tr. (Stop Code: 106) ,35.165962,-111.664435,1,,,,America/Phoenix,1
+107,107,Lake Mary / Mohawk,Lake Mary Rd. / Mohawk Dr. (Stop Code: 107) ,35.162181,-111.662525,1,,,,America/Phoenix,1
+108,108,Walapai/Lake Mary,Walapai Dr. / Yaqui St. (Forest Ridge Apts - South) (Stop Code: 108),35.160315,-111.660283,1,,,,America/Phoenix,2
+109,109,Walapai / Yaqui (North),Walapai Dr. / Yaqui Dr. (Forest Ridge Apts - North) (Stop Code: 109),35.162946,-111.658612,1,,,,America/Phoenix,2
+110,110,Zuni / Kofa,Zuni Dr. / Kofa Dr. (Stop Code: 110) ,35.16456,-111.655546,1,,,,America/Phoenix,2
+111,111,Lone Tree (CCC),Lone Tree Rd. (Coconino Community College) (Stop Code: 111) ,35.171344,-111.648146,1,,,,America/Phoenix,1
+112,112,Lone Tree / Pine,Lone Tree Rd. / Pine Knoll Dr. (Stop Code: 112) ,35.180017,-111.648173,1,,,,America/Phoenix,1
+113,113,Lone Tree / Wood,Lone Tree Rd. / Woodland Dr. (Stop Code: 113) ,35.184701,-111.64802,1,,,,America/Phoenix,2
+114,114,Lone Tree / Brannen,Lone Tree Rd. / Brannen Cir. (Stop Code: 114) ,35.186637,-111.646668,1,,,,America/Phoenix,2
+115,115,Lone Tree / Franklin,Lone Tree Rd. / Franklin Ave. (Stop Code: 115) ,35.190198,-111.645499,1,,,,America/Phoenix,1
+118,118,Aspen (City Hall) EB,Aspen Av. (City Hall) EB (Stop Code: 118),35.199494,-111.65199,1,,,,America/Phoenix,1
+119,119,Santa Fe / Park WB,,35.199446,-111.654946,1,,,,America/Phoenix,2
+127,127,Fort Valley (Pioneer Museum),Fort Valley Rd. (Pioneer Museum) (Stop Code: 127) ,35.223267,-111.655317,1,,,,America/Phoenix,1
+128,128,Fort Valley / Winding Brook,Fort Valley Rd. / Winding Brook Rd. (The Peaks) (Stop Code: 128) ,35.23245,-111.661633,1,,,,America/Phoenix,2
+129,129,Fort Valley / Valley Crest,Fort Valley Rd. / Valley Crest St. (Stop Code: 129) ,35.235903,-111.66586,1,,,,America/Phoenix,1
+130,130,Peak View / Mountain,Peak View St. / Mountain Dr. (Stop Code: 130) ,35.238633,-111.67375,1,,,,America/Phoenix,2
+131,131,Peak View / Cooper,Peak View St./ Cooper Dr. (Stop Code: 131) ,35.23605,-111.674383,1,,,,America/Phoenix,2
+132,132,Peak View / Fremont,Peak View St. / Fremont Blvd. (Stop Code: 132) ,35.231517,-111.673767,1,,,,America/Phoenix,2
+133,133,Fremont / Lynette,Fremont Blvd. / Lynette Dr. (Stop Code: 133) ,35.23251,-111.668667,1,,,,America/Phoenix,2
+138,138,Fort Valley / Meade SB,Fort Valley Rd. / Meade Lane (Stop Code: 138) ,35.217617,-111.650683,1,,,,America/Phoenix,1
+139,139,Fort Valley / Whipple,Fort Valley Rd. / Whipple Rd. (Stop Code: 139) ,35.21265,-111.650267,1,,,,America/Phoenix,1
+141,141,Thorpe / Bonito WB,Thorpe Rd. / Bonito St. (Stop Code: 141) ,35.207779,-111.65288,1,,,,America/Phoenix,1
+142,142,Thorpe (Clark Homes) WB,Thorpe Rd. (Clark Homes) (Stop Code: 142) ,35.208354,-111.656787,1,,,,America/Phoenix,1
+143,143,Thorpe (Ball Fields) SB,Thorpe Rd. (Ball Fields) (Stop Code: 143) ,35.205967,-111.658867,1,,,,America/Phoenix,2
+144,144,Thorpe (Adult Center) SB,Thorpe Rd. (Adult Center) (Stop Code: 144) ,35.20292,-111.65836,1,,,,America/Phoenix,1
+146,146,Route 66 (The Standard),,35.192099,-111.662752,Base,,,,America/Phoenix,2
+147,147,Aspen (City Hall) WB,Aspen Ave. (City Hall) WB (Stop Code: 147),35.199489,-111.651613,1,,,,America/Phoenix,1
+148,148,Woodlands Village / University,Woodlands Village Blvd. / University Ave. (Stop Code: 148) ,35.184398,-111.66834,1,,,,America/Phoenix,1
+150,150,Route 66  /  Pinnacle,Rt. 66 / Pinnacle St. (Stop Code: 150) ,35.190582,-111.66463,1,,,,America/Phoenix,2
+151,151,Thompson (AZ Daily Sun),Thompson St. (Arizona Daily Sun) (Stop Code: 151) ,35.186483,-111.67493,1,,,,America/Phoenix,2
+152,152,Univ / Forest Meadows,University Ave. / Forest Meadows St. (True North Dentistry) (Stop Code: 152) ,35.184057,-111.6711,1,,,,America/Phoenix,1
+155,155,Route 66  /  Metz Walk,Rt. 66 / Metz Walk (Stop Code: 155) ,35.19263,-111.66129,1,,,,America/Phoenix,1
+156,156,Milton / Northern Arizona Univ,Milton Rd. / NAU (Stop Code: 156) ,35.193658,-111.65722,1,,,,America/Phoenix,1
+160,160,Santa Fe / Park EB,Santa Fe Ave. / Park St. (Stop Code: 160) ,35.199464,-111.655214,1,,,,America/Phoenix,1
+161,161,Huntington (Walmart) EB,Huntington Dr. (Walmart Supercenter) (Stop Code: 161) ,35.198808,-111.61596,1,,,,America/Phoenix,1
+162,162,Fourth / Huntington NB,Fourth St. / Huntington Dr. (Aquatic Center) (Stop Code: 162) ,35.204433,-111.61087,1,,,,America/Phoenix,1
+163,163,Fourth (Walgreens),Fourth St. (Walgreen's) (Stop Code: 163) ,35.207874,-111.613312,1,,,,America/Phoenix,2
+164,164,Sixth / Third,Sixth Ave. / Third St. (Stop Code: 164) ,35.2108,-111.614262,1,,,,America/Phoenix,1
+165,165,Sixth / First,Sixth Ave. / First St. (Killip Elementary) (Stop Code: 165) ,35.210783,-111.617317,1,,,,America/Phoenix,2
+166,166,Sixth / West,Sixth Ave. / West St. (Stop Code: 166) ,35.2108,-111.620533,1,,,,America/Phoenix,1
+167,167,West / Felice,West St. / Felice Ave. (Stop Code: 167) ,35.213503,-111.6213,1,,,,America/Phoenix,1
+170,170,Fourth / Cedar,Fourth St. / Cedar Ave. (Stop Code: 170) ,35.217453,-111.61363,1,,,,America/Phoenix,1
+171,171,Fourth / Felice,Fourth St. / Felice Ave. (Wells Fargo) (Stop Code: 171) ,35.214312,-111.6136,1,,,,America/Phoenix,2
+172,172,Fourth and Route 66,Fourth St. at Route 66 (Stop Code: 172) ,35.207374,-111.613536,1,,,,America/Phoenix,2
+173,173,Fourth / Huntington SB,Fourth St. / Huntington Dr. (Aquatic Center) (Stop Code: 173) ,35.204517,-111.61136,1,,,,America/Phoenix,1
+174,174,Huntington (Walmart) WB,Huntington Dr. (Walmart Supercenter) (Stop Code: 174) ,35.197902,-111.61715,1,,,,America/Phoenix,1
+177,177,Hntngtn (New) OB,,35.194072,-111.622139,Base,,,,America/Phoenix,2
+178,178,Hntngtn (New) IB,,35.194213,-111.621936,Base,,,,America/Phoenix,2
+190,190,Route 66  /  Woodlands Village,Rt. 66 / Woodlands Village Blvd.  (Stop Code: 190),35.188508,-111.66726,1,,,,America/Phoenix,1
+191,191,Thorpe (Adult Center) NB,Thorpe Rd. (Adult Center) (Stop Code: 191) ,35.203223,-111.658219,1,,,,America/Phoenix,1
+192,192,Thorpe (Ball Fields) NB,Thorpe Rd. (Ball Fields) (Stop Code: 192) ,35.206288,-111.658739,1,,,,America/Phoenix,1
+200,200,Thorpe (Clark Homes) EB,Thorpe Rd. (Clark Homes) (Stop Code: 200) ,35.208172,-111.657003,1,,,,America/Phoenix,1
+201,201,Thorpe / Bonito EB,Thorpe Rd. / Bonito St. (Stop Code: 201) ,35.207751,-111.653245,1,,,,America/Phoenix,1
+202,202,Fort Valley / Stevanna,Fort Valley Rd. / Stevanna Way (Stop Code: 202) ,35.224433,-111.65705,1,,,,America/Phoenix,2
+203,203,Fort Valley / Forest,Fort Valley Rd. / Forest Ave. (Stop Code: 203) ,35.210733,-111.648786,1,,,,America/Phoenix,2
+204,204,Fremont (FALA),Fremont Blvd. / FALA (Stop Code: 204) ,35.23816,-111.66935,1,,,,America/Phoenix,1
+205,205,Fremont (Cheshire Park),Fremont Blvd. (Cheshire Park) (Stop Code: 205) ,35.235233,-111.66925,1,,,,America/Phoenix,2
+206,206,Beaver (Flag Medical Ctr) NB,Beaver St. (Flagstaff Medical Ctr) (Stop Code: 206) ,35.209762,-111.64467,1,,,,America/Phoenix,1
+207,207,Fort Valley / Meade NB,Fort Valley Rd. / Meade Ln. (Stop Code: 207) ,35.218083,-111.650583,1,,,,America/Phoenix,2
+208,208,Fort Valley (Museum of N. AZ),Fort Valley Rd. (Museum of Northern Arizona) (Stop Code: 208) ,35.23484,-111.66492,1,,,,America/Phoenix,2
+209,209,Milton (Taco Bell),Milton Rd. (Taco Bell) (Stop Code: 209) ,35.1884,-111.661733,1,,,,America/Phoenix,2
+220,220,Lone Tree / Franklin,Lone Tree Rd. / Franklin Av. (stop code 220),35.189339,-111.64575,1,,,,America/Phoenix,1
+221,221,Lone Tree / Brannen,Lone Tree/Brannen (stop code 221),35.186163,-111.6473,1,,,,America/Phoenix,2
+222,222,Lone Tree / Pine,Lone Tree Rd. / Pine Knoll Dr. (stop code 222),35.178951,-111.64833,1,,,,America/Phoenix,1
+223,223,Lone Tree (CCC),Lone Tree Rd. (Coconino Community College) (stop code 223),35.17135,-111.6483,1,,,,America/Phoenix,1
+224,224,Zuni / Kofa,Zuni Dr. / Kofa Dr. (stop code 224),35.164752,-111.655335,1,,,,America/Phoenix,2
+225,225,Walapai / South Yaqui,Walapai Dr. / S Yaqui Dr. (Forest Ridge Apts.) (stop code 225),35.163174,-111.658427,1,,,,America/Phoenix,2
+226,226,Walapai / Lake Mary,Walapai Dr. / Lake Mary Rd. (stop code 226),35.160376,-111.66035,1,,,,America/Phoenix,2
+227,227,Lake Mary / Mohawk,Lake Mary Rd. / Mohawk Dr. (stop code 227),35.161971,-111.66214,1,,,,America/Phoenix,1
+228,228,Lake Mary / Hi Cntry,Lake Mary Rd. / High Country Tr. (stop code 228),35.165856,-111.66416,1,,,,America/Phoenix,1
+229,229,Lake Mary / Beulah,Lake Mary Rd. / Beulah Blvd. (stop code 229),35.169906,-111.665785,1,,,,America/Phoenix,2
+230,230,Milton / Forest Meadows,Milton Rd. / Forest Meadows St. (Mobil) (stop code 230),35.180021,-111.661276,1,,,,America/Phoenix,1
+231,231,Milton / University,Milton Rd. / University Dr. (Target) (stop code 231),35.183662,-111.66124,1,,,,America/Phoenix,1
+232,232,Milton / Plaza Way,Milton Rd. / Plaza Way (Wells Fargo) (stop code 232),35.188763,-111.66141,1,,,,America/Phoenix,1
+233,233,Sawmill (Grove),Sawmill Rd. / Windsor Ln. (Grove Apts.) (stop code 233),35.188878,-111.643184,1,,,,America/Phoenix,2
+238,238,Gemini / Pine Cliff (BASIS),,35.208262,-111.634333,1,,,,America/Phoenix,2
+239,239,Gemini / Pine Cliff (BASIS),,35.208258,-111.634494,1,,,,America/Phoenix,2
+240,240,Fourth / Sparrow (NPA) SB,,35.199113,-111.607537,1,,,,America/Phoenix,2
+241,241,Fourth / Sparrow (NPA) NB,,35.199092,-111.607339,1,,,,America/Phoenix,2
+251,251,Hart Prairie Lodge,,35.330199,-111.710555,1,,,,America/Phoenix,2
+252,252,Flag High Park and Ride,,35.204696,-111.649677,Base,,,,America/Phoenix,2
+256,256,Desilva Ave/Beaver St,,35.207103,-111.645754,Base,,,,America/Phoenix,2
+520,520,University Dr/S. Knoles Dr.,,35.184802,-111.657675,Base,,,,America/Phoenix,2
+521,521,University Dr./S. Knoles Dr.,,35.184477,-111.657675,Base,,,,America/Phoenix,2
+9000,9000,Fairgrounds,,35.142631,-111.693084,Base,,,,America/Phoenix,2
+9991,9991,NAU ,,35.176674,-111.659582,Base,,,,America/Phoenix,1
+9998,9998,No stop,Phantom stop used as a placeholder to maintain correct stop sequencing,35.218722,-111.593193,1,,,,America/Phoenix,2
