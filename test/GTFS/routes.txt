@@ -1,5 +1,0 @@
-route_id,agency_id,route_short_name,route_long_name,hidden,route_desc,route_type,route_url,route_color,route_text_color
-"green2",1,"","Green 2",0,,3,,009933,ffffff
-"green1",1,"","Green 1",0,,3,,009933,ffffff
-"gold2",1,"","Gold 2",0,,3,,ff9900,000000
-"gold1",1,"","Gold 1",0,,3,,ff9900,000000
