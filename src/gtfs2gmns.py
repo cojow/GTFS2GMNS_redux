@@ -37,7 +37,7 @@ from func_lib import (reading_text,
 
 class GTFS2GMNS:
 
-    def __init__(self, gtfs_dir: str, gtfs_result_dir:str = "", time_period: str = '0700_0800'):
+    def __init__(self, gtfs_dir: str, gtfs_result_dir: str = "", time_period: str = '0700_0800'):
 
         # TDD development
         if not os.path.isdir(gtfs_dir):
@@ -101,7 +101,12 @@ class GTFS2GMNS:
         # direction_id is mandatory field name here
         if 'direction_id' not in trip_df.columns.tolist():
             trip_df['direction_id'] = "0"
-        trip_df['direction_id'] = trip_df.apply(lambda x: str(2 - int(x['direction_id'])), axis=1)
+
+        # Deal with special issues of direction_id exists but all values are NaN
+        try:
+            trip_df['direction_id'] = trip_df.apply(lambda x: str(2 - int(x['direction_id'])), axis=1)
+        except Exception:
+            trip_df['direction_id'] = "0"
 
         # add a new column "directed_route_id"
         #  If trips on a route service opposite directions,distinguish directions using values 0 and 1.
