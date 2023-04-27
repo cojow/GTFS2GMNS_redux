@@ -22,9 +22,7 @@ from utility_lib import (func_running_time,
                          check_required_files_exist,
                          path2linux,
                          validate_filename)
-
-from func_lib import (reading_text,
-                      hhmm_to_minutes,
+from func_lib import (hhmm_to_minutes,
                       determine_terminal_flag,
                       stop_sequence_label,
                       convert_route_type_to_node_type_p,
@@ -35,20 +33,27 @@ from func_lib import (reading_text,
                       transferring_penalty,
                       allowed_use_transferring)
 
+
 class GTFS2GMNS:
 
-    def __init__(self, gtfs_dir: str, gtfs_result_dir: str = "", time_period: str = '0700_0800'):
+    def __init__(self, gtfs_dir: str, gtfs_result_dir: str = "", time_period: str = '0700_0800', isSaveToCSV=True):
 
         # TDD development
         if not os.path.isdir(gtfs_dir):
             raise ValueError('The input folder does not exist.')
 
-        if not os.path.isdir(gtfs_result_dir):
-            raise ValueError('The output folder does not exist.')
+        # if user specified output folder, check folder existance first,
+        # else, save results to same input folder
+        if gtfs_result_dir:
+            if not os.path.isdir(gtfs_result_dir):
+                raise ValueError('The output folder does not exist.')
+            self.gtfs_result_dir = gtfs_result_dir
+        else:
+            self.gtfs_result_dir = gtfs_dir
 
         self.gtfs_dir = gtfs_dir
         self.time_period = time_period
-        self.gtfs_result_dir = gtfs_result_dir
+        self.isSaveToCSV = isSaveToCSV
 
         self.period_start_time, self.period_end_time = hhmm_to_minutes(self.time_period)
         self.required_files = ['agency.txt', 'stops.txt', 'routes.txt', 'trips.txt', 'stop_times.txt']
@@ -117,6 +122,11 @@ class GTFS2GMNS:
         directed_route_id = trip_df['route_id'].astype(str).str.cat(trip_df['direction_id'].astype(str), sep='.')
         trip_df['directed_route_id'] = directed_route_id
 
+        # deal with special issues with route_id in two dataframes have different formats
+        route_df["route_id"] = route_df["route_id"].astype(str)
+        trip_df["route_id"] = trip_df["route_id"].astype(str)
+
+        # make route_id in two dataframes have the same format
         if (route_df['route_id'][0][0] == '"') != (trip_df['route_id'][0][0] == '"'):
             if route_df['route_id'][0][0] == '"':
                 route_df['route_id'] = route_df.apply(lambda x: x['route_id'].strip('"'), axis=1)
@@ -158,25 +168,28 @@ class GTFS2GMNS:
         # mark terminal flag for each stop. The terminals can only be determined at the level of trips
 
         input_list = []
-        time_start = time.time()
         for trip_id, trip_stop_time_df in iteration_group:
             trip_stop_time_df = trip_stop_time_df.sort_values(by=['stop_sequence'])
             trip_stop_time_df = trip_stop_time_df.reset_index()
 
             # select only the trips within the provided time window
-            mask1 = trip_stop_time_df.arrival_time.min() <= self.period_end_time
+            mask1 = trip_stop_time_df.arrival_time.max() <= self.period_end_time
             mask2 = trip_stop_time_df.arrival_time.min() >= self.period_start_time
             if mask1 and mask2:
                 input_list.append(trip_stop_time_df)
+            else:
+                print(f"Info: trip_id = {trip_id} is not within the provided time window: {self.period_start_time} and {self.period_end_time}")
+
+        # check if there is any trip within the provided time window
+        # if not, raise an error
+        if not input_list:
+            raise Exception("Error: no trips are within the provided time window, please check/change the time window from input.")
 
         intermediate_output_list = list(map(determine_terminal_flag, input_list))
         output_list = list(map(stop_sequence_label, intermediate_output_list))
-        print(f'Info: add terminal_flag for trips using CPU time:{time.time() - time_start} s \n')
 
-        time_start = time.time()
         stop_time_df_with_terminal = pd.concat(output_list, axis=0)
         stop_time_df_with_terminal["trip_id"] = stop_time_df_with_terminal["trip_id"].astype(str)
-        print(f'Info: concatenate different trips using CPU time: {time.time() - time_start} s')
         print(f"    have updated {len(stop_time_df_with_terminal)} stop_time records \n")
 
         print("Info: merge the route information with trip information...")
@@ -216,7 +229,7 @@ class GTFS2GMNS:
         return [stop_df, route_df, trip_df, trip_route_df, stop_time_df, directed_trip_route_stop_time_df]
 
     @func_running_time
-    def create_nodes(self, directed_trip_route_stop_time_df: pd.DataFrame) -> pd.DataFrame:
+    def create_nodes(self, directed_trip_route_stop_time_df: pd.DataFrame, agency_num: int = 1) -> pd.DataFrame:
 
         print("Info: start creating physical nodes...")
 
@@ -227,7 +240,7 @@ class GTFS2GMNS:
         physical_node_df = physical_node_df.sort_values(by=['name'])
         physical_node_df['node_id'] = \
             np.linspace(start=1, stop=len(physical_node_df), num=len(physical_node_df)).astype('int32')
-        physical_node_df['node_id'] += int('1000000')
+        physical_node_df['node_id'] += int(f'{agency_num}000000')
         physical_node_df['physical_node_id'] = physical_node_df['node_id']
         physical_node_df['x_coord'] = temp_df['stop_lon'].astype(float)
         physical_node_df['y_coord'] = temp_df['stop_lat'].astype(float)
@@ -256,7 +269,7 @@ class GTFS2GMNS:
         service_node_df['node_id'] = \
             np.linspace(start=1, stop=len(service_node_df), num=len(service_node_df)).astype('int32')
         service_node_df['physical_node_id'] = temp_df.apply(lambda x: stop_name_id_dict[x.stop_id], axis=1)
-        service_node_df['node_id'] += int('1500000')
+        service_node_df['node_id'] += int(f'{agency_num}500000')
 
         service_node_df['x_coord'] = temp_df['stop_lon'].astype(float) - 0.000100
         service_node_df['y_coord'] = temp_df['stop_lat'].astype(float) - 0.000100
@@ -280,7 +293,11 @@ class GTFS2GMNS:
         return pd.concat([physical_node_df, service_node_df])
 
     @func_running_time
-    def create_service_boarding_links(self, directed_trip_route_stop_time_df: pd.DataFrame, node_df, one_agency_link_list: list) -> list:
+    def create_service_boarding_links(self,
+                                      directed_trip_route_stop_time_df: pd.DataFrame,
+                                      node_df: pd.DataFrame,
+                                      one_agency_link_list: list,
+                                      agency_num: int = 1) -> list:
 
         # initialize dictionaries
         node_id_dict = dict(zip(node_df['name'], node_df['node_id']))
@@ -309,7 +326,7 @@ class GTFS2GMNS:
                 one_line_df = one_line_df.reset_index()
 
                 for k in range(number_of_records - 1):
-                    link_id = 1000000 + number_of_route_links + 1
+                    link_id = 1000000 * agency_num + number_of_route_links + 1
                     from_node_id = node_id_dict[one_line_df.iloc[k].directed_service_stop_id]
                     to_node_id = node_id_dict[one_line_df.iloc[k + 1].directed_service_stop_id]
                     facility_type = convert_route_type_to_link_type(one_line_df.iloc[k].route_type)
@@ -358,7 +375,7 @@ class GTFS2GMNS:
         service_node_df = service_node_df.reset_index()
         number_of_sta2route_links = 0
         for iter, row in service_node_df.iterrows():
-            link_id = 1000000 + number_of_route_links + number_of_sta2route_links
+            link_id = agency_num * 1000000 + number_of_route_links + number_of_sta2route_links
             from_node_id = row.physical_node_id
             to_node_id = row.node_id
             facility_type = convert_route_type_to_link_type(row.route_type)
@@ -403,7 +420,7 @@ class GTFS2GMNS:
             number_of_sta2route_links += 1
 
             # outbound links (boarding)
-            link_id = 1000000 + number_of_route_links + number_of_sta2route_links
+            link_id = agency_num * 1000000 + number_of_route_links + number_of_sta2route_links
             VDF_fftt1 = 1  # (length / free_speed) * 60
             #  the time of outbound time
             link_list_outbound = [link_id, to_node_id, from_node_id, facility_type, dir_flag, directed_route_id,
@@ -516,9 +533,10 @@ class GTFS2GMNS:
 
         return all_link_list
 
-    def main(self, isSaveToCSV: bool = True):
+    @func_running_time
+    def gtfs2gnms_single_region(self, gtfs_dir: str) -> list:
         #  step 1. reading data
-        stop_df, route_df, trip_df, trip_route_df, stop_time_df, directed_trip_route_stop_time_df = self.read_gtfs_data(self.gtfs_dir)
+        stop_df, route_df, trip_df, trip_route_df, stop_time_df, directed_trip_route_stop_time_df = self.read_gtfs_data(gtfs_dir)
 
         #  directed_trip_route_stop_time_df.to_csv(gtfs_folder_list[i] + '/timetable.csv', index=False)
         #  directed_trip_route_stop_time_df = pd.read_csv(gtfs_folder_list[i] + '/timetable.csv')
@@ -565,7 +583,7 @@ class GTFS2GMNS:
 
         # step 4. save node and link data
         # create node and link result path
-        if isSaveToCSV:
+        if self.isSaveToCSV:
             node_result_file = path2linux(os.path.join(self.gtfs_result_dir, "node.csv"))
             link_result_file = path2linux(os.path.join(self.gtfs_result_dir, "link.csv"))
 
@@ -584,12 +602,104 @@ class GTFS2GMNS:
 
         return node_df, all_link_df
 
+    @func_running_time
+    def main(self):
+
+        # Step 1. Check multiple agencies or not
+        folders = os.listdir(self.gtfs_dir)
+        gtfs_folder_list = []
+        for sub_folder in folders:
+            sub_folder_path = self.gtfs_dir + '/' + sub_folder
+            if os.path.isdir(sub_folder_path):  # check whether the specified path is an existing directory or not.
+                gtfs_folder_list.append(sub_folder_path)
+        if len(gtfs_folder_list) == 0:
+            gtfs_folder_list.append(self.gtfs_dir)
+
+        all_node_list = []
+        all_link_list = []
+        for i in range(len(gtfs_folder_list)):
+            print(f'Start converting Agency_{i+1}...')
+            print('Directory : ' + str(gtfs_folder_list[i]))
+            agency_gtfs_path = gtfs_folder_list[i]
+            """ step 1. reading data """
+            stop_df, route_df, trip_df, trip_route_df, stop_time_df, directed_trip_route_stop_time_df = self.read_gtfs_data(agency_gtfs_path)
+
+            """step 2. create nodes"""
+            agency_num = i + 1
+            # number of agency equals to i+1
+            node_df = self.create_nodes(directed_trip_route_stop_time_df, agency_num)
+            all_node_list.append(node_df)
+            print("node.csv of", str(gtfs_folder_list[i]), "has been generated...")
+
+            """step 3. create links"""
+            all_link_list = self.create_service_boarding_links(directed_trip_route_stop_time_df, node_df, all_link_list, agency_num)
+
+            if i == len(gtfs_folder_list):
+                print('output')
+            print(f'Conversion of Agency{agency_num + 1} have done.')
+
+        all_node_df = pd.concat(all_node_list)
+        all_node_df.reset_index(inplace=True)
+        all_node_df = all_node_df.drop(['index'], axis=1)
+
+        # transferring links
+        all_link_list = self.create_transferring_links(all_node_df, all_link_list)
+
+        all_link_df = pd.DataFrame(all_link_list)
+        all_link_df.rename(columns={0: 'link_id',
+                                    1: 'from_node_id',
+                                    2: 'to_node_id',
+                                    3: 'facility_type',
+                                    4: 'dir_flag',
+                                    5: 'directed_route_id',
+                                    6: 'link_type',
+                                    7: 'link_type_name',
+                                    8: 'length',
+                                    9: 'lanes',
+                                    10: 'capacity',
+                                    11: 'free_speed',
+                                    12: 'cost',
+                                    13: 'VDF_fftt1',
+                                    14: 'VDF_cap1',
+                                    15: 'VDF_alpha1',
+                                    16: 'VDF_beta1',
+                                    17: 'VDF_penalty1',
+                                    18: 'geometry',
+                                    19: 'VDF_allowed_uses1',
+                                    20: 'agency_name',
+                                    21: 'stop_sequence',
+                                    22: 'directed_service_id'}, inplace=True)
+
+        all_link_df = all_link_df.drop_duplicates(
+            subset=['from_node_id', 'to_node_id'], keep='last').reset_index(drop=True)
+
+        # step 4. save node and link data
+        # create node and link result path
+        if self.isSaveToCSV:
+            node_result_file = path2linux(os.path.join(self.gtfs_result_dir, "node.csv"))
+            link_result_file = path2linux(os.path.join(self.gtfs_result_dir, "link.csv"))
+
+            # validate result file path exist or not, if exist, create new file wit _1 suffix
+            node_result_file = validate_filename(node_result_file)
+            link_result_file = validate_filename(link_result_file)
+
+            #  zone_df = pd.read_csv('zone.csv')
+            #  source_node_df = pd.read_csv('source_node.csv')
+            #  node_df = pd.concat([zone_df, all_node_df])
+            all_node_df.to_csv(node_result_file, index=False)
+            all_link_df.to_csv(link_result_file, index=False)
+            print(f"Info: successfully converted gtfs data to node and link data:\n  {node_result_file}, {link_result_file}")
+        else:
+            print("Info: successfully converted gtfs data to node and link and return node and link dataframe")
+
+        return all_node_df, all_link_df
+
 
 if __name__ == '__main__':
 
-    gtfs_dir = r'C:\Users\roche\Anaconda_workspace\001_Github.com\GTFS2GMNS\test\GTFS'
-    # gtfs_dir = r'C:\Users\roche\Anaconda_workspace\001_Github.com\GTFS2GMNS\test\GTFS\Phoenix'
-    output_gmns_path = '.'
-    time_period = '0700_0800'
+    gtfs_dir = r'C:\Users\roche\Anaconda_workspace\001_Github\GTFS2GMNS\test'
+    # gtfs_dir = r'C:\Users\roche\Dropbox (ASU)\ASU_CEE_598_Public_Transportation_Engineering_Spring2023\final_project\Massachusetts_gtfs\Boston_gtfs'
 
-    node_df, link_df = GTFS2GMNS(gtfs_dir, output_gmns_path, time_period).main()
+    time_period = '0000_2300'
+
+    node_df, link_df = GTFS2GMNS(gtfs_dir, time_period=time_period).main()
