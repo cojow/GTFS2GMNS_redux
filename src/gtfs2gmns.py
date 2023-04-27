@@ -698,7 +698,6 @@ class GTFS2GMNS:
 if __name__ == '__main__':
 
     gtfs_dir = r'C:\Users\roche\Anaconda_workspace\001_Github\GTFS2GMNS\test'
-    # gtfs_dir = r'C:\Users\roche\Dropbox (ASU)\ASU_CEE_598_Public_Transportation_Engineering_Spring2023\final_project\Massachusetts_gtfs\Boston_gtfs'
 
     time_period = '0000_2300'
 
