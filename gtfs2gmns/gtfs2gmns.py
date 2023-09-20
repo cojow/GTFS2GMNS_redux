@@ -18,6 +18,7 @@ from gtfs2gmns.utility_lib import (func_running_time,
 class GTFS2GMNS:
 
     def __init__(self, gtfs_input_dir: str, time_period: str = '07:00:00_08:00:00',
+                 date_period: list = [],
                  gtfs_output_dir: str = "", isSaveToCSV: bool = True):
 
         # TDD 1: check if the input folder exists
@@ -37,7 +38,6 @@ class GTFS2GMNS:
         # TDD 3: check if the time period is valid
         self.time_period = time_period
         self.period_start_time, self.period_end_time = validate_time_period(time_period)
-        # self.period_start_time, self.period_end_time = hhmm_to_minutes(self.time_period)
 
         self.gtfs_input_dir = gtfs_input_dir
         self.isSaveToCSV = isSaveToCSV
@@ -51,8 +51,9 @@ class GTFS2GMNS:
     @property
     def agency(self) -> pd.DataFrame:
         try:
-            return self.gtfs_dict.get("agency")
-        except Exception:
+            return self.__gfts_dict.get("agency")
+        except Exception as e:
+            print("Error: ", e)
             return "Need to load GTFS data first: gtfs2gmns.load_gtfs()"
 
     @property
@@ -116,11 +117,61 @@ class GTFS2GMNS:
         return self.__get_text_data_from_folder_lst(self.gtfs_folder_list, "transfers.txt")
 
     @property
+    def timepoints(self) -> pd.DataFrame:
+        return self.__get_text_data_from_folder_lst(self.gtfs_folder_list, "timepoints.txt")
+
+    @property
+    def timepoint_times(self) -> pd.DataFrame:
+        return self.__get_text_data_from_folder_lst(self.gtfs_folder_list, "timepoint_times.txt")
+
+    @property
     def trip_routes(self) -> pd.DataFrame:
         try:
             return self.__gfts_dict.get("trip_routes")
         except Exception:
             return "Need to load GTFS data first: gtfs2gmns.load_gtfs()"
+
+    @property
+    def stops_freq(self) -> pd.DataFrame:
+        return None
+
+    @property
+    def routes_freq(self) -> pd.DataFrame:
+        return None
+
+    @property
+    def route_segments(self) -> pd.DataFrame:
+        return None
+
+    @property
+    def route_segment_speed(self) -> pd.DataFrame:
+        return None
+
+    @property
+    def vis_stops_freq(self):
+        "visualization of stops - 3D "
+        return None
+
+    @property
+    def vis_routes_freq(self):
+        "visualization of routes - 3D "
+        return None
+
+    @property
+    def vis_route_segment_freq(self):
+        return None
+
+    @property
+    def vis_route_segment_speed(self):
+        return None
+
+    @property
+    def vis_route_segment_time(self):
+        return None
+
+    @property
+    def vis_route_stop_speed_heatmap(self):
+        return None
 
     def __get_gtfs_folder_list(self) -> list:
         folders = os.listdir(self.gtfs_input_dir)
@@ -185,6 +236,7 @@ class GTFS2GMNS:
             "stop_times": pd.concat(stop_time_list, axis=0) if len(stop_time_list) > 1 else stop_time_list[0],
             "directed_trip_route_stop_time": pd.concat(directed_trip_route_stop_time_list, axis=0) if len(directed_trip_route_stop_time_list) > 1 else directed_trip_route_stop_time_list[0]
         }
+        return None
 
     @func_running_time
     def gen_gmns_nodes_links(self) -> list:
