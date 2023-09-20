@@ -1,2 +1,0 @@
-agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone,agency_email
-4,Mountain Line,https://www.mountainline.az.gov,America/Phoenix,en,928-779-6624,transportation@mountainline.az.gov

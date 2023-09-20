@@ -2,9 +2,7 @@
 
 The open-source Python codes (GTFS2GMNS) is released to facilitate researchers and planners to construct the multi-modal transit networks easily from generic [General Transit Feed Specification (GTFS)](https://gtfs.org/) to the network modeling format in [General Modeling Network Specification (GMNS)](https://github.com/zephyr-data-specs/GMNS). The converted physical and service networks in GMNS format are more convenient for network modeling tasks such as transit network routing, traffic flow assignment, simulation and service network optimization.
 
-Your comments will be valuable for code review and improvement. Please feel free to add your comments to our Google document of [GTFS2GMNS Users' Guide](https://docs.google.com/document/d/1-A2g4ZjJu-gzusEKcSoOXzr95S3tv7sj/edit?usp=sharing&ouid=112385243549486266715&rtpof=true&sd=true).
-
-
+Your comments will be valuable for code review and improvement. Please feel free to add your comments to our Google document of [GTFS2GMNS Users&#39; Guide](https://docs.google.com/document/d/1-A2g4ZjJu-gzusEKcSoOXzr95S3tv7sj/edit?usp=sharing&ouid=112385243549486266715&rtpof=true&sd=true).
 
 ## Getting Started
 
@@ -17,7 +15,7 @@ On TransitFeed [homepage](https://transitfeeds.com/), users can browse and downl
 * trip.txt
 * stop_times.txt
 * agency.txt
- 
+
 GTFS2GMNS can handle the transit data from several agencies. Users need to configure different sub-files in the same directory. Under the `test/GTFS` folder, a subfolder `Pheonix` with its owm GTFS data is set up.
 
 ### *Convert GTFS Data into GMNS Format*
@@ -39,9 +37,6 @@ The input parameter  `input_gtfs_path` is the path of GTFS data, and the paramet
 
 The output files include node.csv and link.csv.
 
-
-
-
 ## Main Steps
 
 ### *Read GTFS data*
@@ -62,13 +57,11 @@ The output files include node.csv and link.csv.
 **Step 1.4: Read stop_times.txt**
 
 - trip_id, stop_id, arrival_time, deaprture_time, stop_sequence
-
 - create directed_route_stop_id by combining directed_route_id and stop_id through the trip_id
 
   > Note: the function needs to skip this record if trip_id is not defined, and link the virtual stop id with corresponding physical stop id.
-
+  >
 - fetch the geometry of the direction_route_stop_id
-
 - return the arrival_time for every stop
 
 ### *Building service network*
@@ -82,7 +75,7 @@ The output files include node.csv and link.csv.
 - add route stop vertexes. the node_id of route stop nodes starts from 100001
 
   > Note: the route stop vertex the programing create nearby the corresponding physical node, to make some offset.
-
+  >
 - add entrance link from physical node to route stop node
 - add exit link from route stop node to physical node. As they both connect to the physical nodes, the in-station transfer process can be also implemented
 
@@ -94,15 +87,15 @@ The output files include node.csv and link.csv.
 
 - add service links between each route stop pair of each trip
 
-
-
 ## Visualization
 
 You can visualize generated networks using [NeXTA](https://github.com/xzhou99/NeXTA-GMNS) or [QGIS](https://qgis.org/).
-
-
 
 ## Upcoming Features
 
 - [ ] Output service and trace files.
 - [ ] Set the time period and add vdf_fftt and vdf_freq fields in link files.
+- [ ] Add Visualization functions
+  - [ ] Stops
+  - [ ] Routes
+  - [ ] ...
