@@ -148,8 +148,9 @@ class GTFS2GMNS:
         return None
 
     @property
-    def vis_stops_freq(self):
-        "visualization of stops - 3D "
+    def vis_stops_freq(self) -> None:
+        "visualization of stops - 3D figure"
+        "return and save the plot"
         return None
 
     @property
@@ -166,11 +167,23 @@ class GTFS2GMNS:
         return None
 
     @property
-    def vis_route_segment_time(self):
+    def vis_route_segment_runtime(self):
         return None
 
     @property
     def vis_route_stop_speed_heatmap(self):
+        return None
+
+    @property
+    def vis_spacetime_trajectory(self):
+        return None
+
+    @property
+    def equity_analysis(self):
+        return None
+
+    @property
+    def accessibility_analysis(self):
         return None
 
     def __get_gtfs_folder_list(self) -> list:

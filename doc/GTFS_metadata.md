@@ -19,9 +19,9 @@ This document defines the format and structure of the files that comprise a GTFS
     -   [calendar\_dates.txt](#calendar_datestxt)
     -   [fare\_attributes.txt](#fare_attributestxt)
     -   [fare\_rules.txt](#fare_rulestxt)
-    -   [timeframes.txt](#timeframestxt)    
+    -   [timeframes.txt](#timeframestxt)
     -   [fare\_media.txt](#fare_mediatxt)
-    -   [fare\_products.txt](#fare_productstxt) 
+    -   [fare\_products.txt](#fare_productstxt)
     -   [fare\_leg\_rules.txt](#fare_leg_rulestxt)
     -   [fare\_transfer\_rules.txt](#fare_transfer_rulestxt)
     -   [areas.txt](#areastxt)
@@ -93,7 +93,7 @@ Signs applicable to Float or Integer field types:
 _Example: **Non-negative float** - A floating point number greater than or equal to 0._
 
 ### Dataset Attributes
-The **primary key** of a dataset is the field or combination of fields that uniquely identify a row. `Primary key (*)` is used when all provided fields for a file are used to uniquely identify a row. `Primary key (none)` means that the file allows only one row. 
+The **primary key** of a dataset is the field or combination of fields that uniquely identify a row. `Primary key (*)` is used when all provided fields for a file are used to uniquely identify a row. `Primary key (none)` means that the file allows only one row.
 
 _Example: the `trip_id` and `stop_sequence` fields make the primary key of [stop_times.txt](#stop_timestxt)._
 
@@ -210,7 +210,7 @@ Primary key (`route_id`)
 |  `route_sort_order` | Non-negative integer | Optional | Orders the routes in a way which is ideal for presentation to customers. Routes with smaller `route_sort_order` values should be displayed first. |
 |  `continuous_pickup` | Enum | Optional | Indicates that the rider can board the transit vehicle at any point along the vehicle’s travel path as described by `shapes.txt`, on every trip of the route. Valid options are: <br><br>`0` - Continuous stopping pickup. <br>`1` or empty - No continuous stopping pickup. <br>`2` - Must phone agency to arrange continuous stopping pickup. <br>`3` - Must coordinate with driver to arrange continuous stopping pickup.  <br><br>Values for `routes.continuous_pickup` may be overridden by defining values in `stop_times.continuous_pickup` for specific `stop_time`s along the route. |
 |  `continuous_drop_off` | Enum | Optional | Indicates that the rider can alight from the transit vehicle at any point along the vehicle’s travel path as described by `shapes.txt`, on every trip of the route. Valid options are: <br><br>`0` - Continuous stopping drop off. <br>`1` or empty - No continuous stopping drop off. <br>`2` - Must phone agency to arrange continuous stopping drop off. <br>`3` - Must coordinate with driver to arrange continuous stopping drop off. <br><br>Values for `routes.continuous_drop_off` may be overridden by defining values in `stop_times.continuous_drop_off` for specific `stop_time`s along the route. |
-| `network_id` | ID | Optional | Identifies a group of routes. Multiple rows in [routes.txt](#routestxt) may have the same `network_id`.| 
+| `network_id` | ID | Optional | Identifies a group of routes. Multiple rows in [routes.txt](#routestxt) may have the same `network_id`.|
 
 ### trips.txt
 
@@ -371,7 +371,7 @@ There must not be overlapping time intervals for the same `timeframe_group_id` a
 
 ### fare_media.txt
 
-File: **Optional** 
+File: **Optional**
 
 Primary Key (`fare_media_id`)
 
@@ -417,7 +417,7 @@ To process the cost of a leg:
     - `fare_leg_rules.from_area_id`
     - `fare_leg_rules.to_area_id`
     - `fare_leg_rules.from_timeframe_group_id`
-    - `fare_leg_rules.to_timeframe_group_id`<br/>    
+    - `fare_leg_rules.to_timeframe_group_id`<br/>
 <br/>
 
 2. If the leg exactly matches a record in `fare_leg_rules.txt` based on the characteristics of travel, that record must be processed to determine the cost of the leg.
@@ -579,14 +579,14 @@ The trips linked together MUST be operated by the same vehicle. The vehicle MAY 
 
 If both a linked trips transfer and a block_id are provided and they produce conflicting results, then the linked trips transfer shall be used.
 
-The last stop of `from_trip_id` SHOULD be geographically close to the first stop of `to_trip_id`, and the last arrival time of `from_trip_id` SHOULD be prior but close to the first departure time of `to_trip_id`. The last arrival time of `from_trip_id` MAY be later than the first departure time of `to_trip_id` in case the `to_trip_id` trip is occurring the subsequent service day. 
+The last stop of `from_trip_id` SHOULD be geographically close to the first stop of `to_trip_id`, and the last arrival time of `from_trip_id` SHOULD be prior but close to the first departure time of `to_trip_id`. The last arrival time of `from_trip_id` MAY be later than the first departure time of `to_trip_id` in case the `to_trip_id` trip is occurring the subsequent service day.
 
 Trips MAY be linked 1-to-1 in the regular case, but MAY also be linked 1-to-n, n-to-1, or n-to-n to represent more complex trip continuations. For example, two train trips (trip A and trip B in the diagram below) can merge into a single train trip (trip C) after a vehicle coupling operation at a common station:
 
 - In a 1-to-n continuation, the `trips.service_id` for each `to_trip_id` MUST be identical.
 - In an n-to-1 continuation, the `trips.service_id` for each `from_trip_id` MUST be identical.
 - n-to-n continuations must respect both constraints.
-- Trips may be linked together as part of multiple distinct continuations, provided that the `trip.service_id` MUST NOT overlap on any day of service. 
+- Trips may be linked together as part of multiple distinct continuations, provided that the `trip.service_id` MUST NOT overlap on any day of service.
 
 <pre>
 Trip A
