@@ -17,7 +17,7 @@ On TransitFeed [homepage](https://transitfeeds.com/), users can browse and downl
 * trip.txt
 * stop_times.txt
 * agency.txt
- 
+
 GTFS2GMNS can handle the transit data from several agencies. Users need to configure different sub-files in the same directory. Under the `test/GTFS` folder, a subfolder `Pheonix` with its owm GTFS data is set up.
 
 ### *Convert GTFS Data into GMNS Format*
