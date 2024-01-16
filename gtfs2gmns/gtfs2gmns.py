@@ -88,6 +88,14 @@ class GTFS2GMNS:
             return "Need to load GTFS data first: gtfs2gmns.load_gtfs()"
 
     @property
+    def route_ids(self) -> list:
+        try:
+            routes_df = self.__gfts_dict.get("routes")
+            return routes_df.route_id.unique().tolist()
+        except Exception:
+            return "Need to load GTFS data first: gtfs2gmns.load_gtfs()"
+
+    @property
     def shapes(self) -> pd.DataFrame:
         return self.__get_text_data_from_folder_lst(self.gtfs_folder_list, "shapes.txt")
 
@@ -136,11 +144,12 @@ class GTFS2GMNS:
         return None
 
     @property
-    def routes_freq(self) -> pd.DataFrame:
+    def route_freq(self) -> pd.DataFrame:
         return None
 
     @property
     def route_segments(self) -> pd.DataFrame:
+        "can adopted from package gtfs_segments"
         return None
 
     @property
@@ -156,6 +165,10 @@ class GTFS2GMNS:
     @property
     def vis_routes_freq(self):
         "visualization of routes - 3D "
+        return None
+
+    def vis_route_segment(self, route_id: list = [], segment_id: list = []):
+        "visualization of route segment - 3D figure"
         return None
 
     @property
@@ -335,3 +348,7 @@ class GTFS2GMNS:
             print("Info: successfully converted gtfs data to node and link and return node and link dataframes")
 
         return [all_node_df, all_link_df]
+
+    def download_gtfs(self, place: str = ""):
+        "learn from package: gtfs_segments"
+        return None

@@ -99,3 +99,39 @@ You can visualize generated networks using [NeXTA](https://github.com/xzhou99/Ne
   - [ ] Stops
   - [ ] Routes
   - [ ] ...
+
+## Citing gtfs2gmns
+
+If you use gtfs2gmns in your research please use the following BibTeX entry:
+
+```
+@misc{gtfs2gmns,
+  author =       {Fang Tang, Xiangyong Luo, Han Wang, Xuesong Zhou},
+  title =        {Connecting Oasis for Transit Deserts: Mathematical Model and Reformulation for Equity-oriented Network Design},
+  howpublished = {Github},
+  year =         {2023},
+  url =          {https://github.com/xyluo25/gtfs2gmns}
+}
+```
+
+
+```
+@misc{gtfs2gmns,
+  author =       {Xiangyong Luo, Fang Tang, Han Wang, Xuesong Zhou},
+  title =        {gtfs2gmns - A class-based instance designed for reading, converting, analyzing, and visualizing GTFS data.},
+  howpublished = {Github},
+  year =         {2023},
+  url =          {https://github.com/xyluo25/gtfs2gmns}
+}
+```
+
+
+```
+@misc{gtfs2gmns,
+  author =       {Xiangyong Luo, Fang Tang, Han Wang, Xuesong Zhou},
+  title =        {gtfs2gmns - A class-based instance designed for reading, converting, analyzing, and visualizing GTFS data.},
+  howpublished = {Github},
+  year =         {2023},
+  url =          {https://github.com/xyluo25/gtfs2gmns}
+}
+```
