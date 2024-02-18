@@ -9,10 +9,9 @@ import os
 import pandas as pd
 from gtfs2gmns.func_lib.read_gtfs import read_gtfs_single
 from gtfs2gmns.func_lib.gen_node_link import create_nodes, create_service_boarding_links, create_transferring_links
-from gtfs2gmns.utility_lib import (func_running_time,
-                                   path2linux,
-                                   validate_filename,
-                                   validate_time_period)
+from gtfs2gmns.func_lib.generate_access_link import generate_access_link
+from gtfs2gmns.utility_lib import (validate_time_period)
+from pyufunc import path2linux, func_running_time, generate_unique_filename
 
 
 class GTFS2GMNS:
@@ -335,8 +334,8 @@ class GTFS2GMNS:
             link_result_file = path2linux(os.path.join(self.gtfs_result_dir, "link.csv"))
 
             # validate result file path exist or not, if exist, create new file wit _1 suffix
-            node_result_file = validate_filename(node_result_file)
-            link_result_file = validate_filename(link_result_file)
+            node_result_file = generate_unique_filename(node_result_file)
+            link_result_file = generate_unique_filename(link_result_file)
 
             #  zone_df = pd.read_csv('zone.csv')
             #  source_node_df = pd.read_csv('source_node.csv')
@@ -352,3 +351,17 @@ class GTFS2GMNS:
     def download_gtfs(self, place: str = ""):
         "learn from package: gtfs_segments"
         return None
+
+    def generate_access_link(self, zone_path: str, node_path: str, radius: float, k_closest: int = 0) -> pd.DataFrame:
+        """Generate access links between zones and nodes based on the given radius and k_closest.
+
+        Args:
+            zone_path (str): _description_
+            node_path (str): _description_
+            radius (float): _description_
+            k_closest (int, optional): _description_. Defaults to 0.
+
+        Returns:
+            pd.DataFrame: _description_
+        """
+        return generate_access_link(zone_path, node_path, radius, k_closest)
