@@ -5,7 +5,7 @@
 # Author/Copyright: Mr. Xiangyong Luo
 ##############################################################
 
-from gtfs2gmns.utility_lib import func_running_time
+from pyufunc import func_running_time
 import pandas as pd
 import time
 import numpy as np
