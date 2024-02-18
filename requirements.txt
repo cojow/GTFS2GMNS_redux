@@ -1,6 +1,4 @@
-numpy>=1.24.3
-pandas>=2.0.3
-pyproj>=3.6.1
-pyufunc>=0.1.8
-pyufunc>=0.1.9
-Shapely>=2.0.3
+numpy
+pandas
+pyufunc
+Shapely
