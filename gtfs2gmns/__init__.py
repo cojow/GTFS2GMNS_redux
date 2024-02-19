@@ -6,5 +6,7 @@
 ##############################################################
 
 from .gtfs2gmns import GTFS2GMNS
+from .func_lib.generate_access_link import generate_access_link
+from .pkg_configs import *
 
-print("gtfs2gmns version: 0.1.3")
+print(f"gtfs2gmns version: {pkg_version}")
