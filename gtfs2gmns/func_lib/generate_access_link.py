@@ -78,5 +78,18 @@ def generate_access_link(zone_path: str,
                         geometry=LineString([zone_center, node_id])
                     )
                 )
-
+                # Also generate links from the transit nodes to the zone centroids
+                access_links.append(
+                    gmns_geo.Link(
+                        id=f"{node_id_i}_{zone_id_i}",
+                        from_node_id=node_id_i,
+                        to_node_id=zone_id_i,
+                        length=calc_distance_on_unit_sphere(zone_center, node_id, "meter"),
+                        lanes=1,
+                        free_speed=-1,
+                        capacity=-1,
+                        allowed_uses='auto',
+                        geometry=LineString([node_id, zone_center])
+                    )
+                )
     return pd.DataFrame([link.as_dict() for link in access_links])
