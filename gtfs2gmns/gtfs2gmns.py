@@ -7,11 +7,11 @@
 
 import os
 import pandas as pd
-from gtfs2gmns.func_lib.read_gtfs import read_gtfs_single
-from gtfs2gmns.func_lib.gen_node_link import create_nodes, create_service_boarding_links, create_transferring_links
-from gtfs2gmns.func_lib.generate_access_link import generate_access_link
-from gtfs2gmns.utility_lib import (validate_time_period)
-from pyufunc import path2linux, func_running_time, generate_unique_filename
+from .func_lib.read_gtfs import read_gtfs_single
+from .func_lib.gen_node_link import create_nodes, create_service_boarding_links, create_transferring_links
+from .func_lib.generate_access_link import generate_access_link
+from .utility_lib import (validate_time_period)
+from pyufunc import func_running_time
 
 
 class GTFS2GMNS:
@@ -300,14 +300,14 @@ class GTFS2GMNS:
         all_link_lst = create_transferring_links(all_node_df, all_link_lst)
         all_link_df = pd.DataFrame(all_link_lst)
 
-        all_link_df.rename(columns={0: 'link_id',
+        all_link_df.rename(columns={0: 'id',
                                     1: 'from_node_id',
                                     2: 'to_node_id',
                                     3: 'facility_type',
                                     4: 'dir_flag',
                                     5: 'directed_route_id',
                                     6: 'link_type',
-                                    7: 'link_type_name',
+                                    7: 'name',
                                     8: 'length',
                                     9: 'lanes',
                                     10: 'capacity',
@@ -319,49 +319,53 @@ class GTFS2GMNS:
                                     16: 'VDF_beta1',
                                     17: 'VDF_penalty1',
                                     18: 'geometry',
-                                    19: 'VDF_allowed_uses1',
+                                    19: 'allowed_uses',
                                     20: 'agency_name',
                                     21: 'stop_sequence',
                                     22: 'directed_service_id'}, inplace=True)
 
         all_link_df = all_link_df.drop_duplicates(
             subset=['from_node_id', 'to_node_id'], keep='last').reset_index(drop=True)
-
+        
         # step 4. save node and link data
         # create node and link result path
         if self.isSaveToCSV:
-            node_result_file = path2linux(os.path.join(self.gtfs_result_dir, "node.csv"))
-            link_result_file = path2linux(os.path.join(self.gtfs_result_dir, "link.csv"))
+            
+            if os.path.exists("node_transit.csv"):
+                os.remove("node_transit.csv")
 
-            # validate result file path exist or not, if exist, create new file wit _1 suffix
-            node_result_file = generate_unique_filename(node_result_file)
-            link_result_file = generate_unique_filename(link_result_file)
+            if os.path.exists("link_transit.csv"):
+                os.remove("link_transit.csv")
+                
+            node_csv_path = os.path.join(self.gtfs_output_dir, "node_transit.csv")
+            link_csv_path = os.path.join(self.gtfs_output_dir, "link_transit.csv")
+            
+            all_node_df.to_csv(node_csv_path, index=False)   
+            all_link_df = all_link_df.drop_duplicates(
+                    subset=['from_node_id', 'to_node_id'],
+                    keep='last').reset_index(drop=True)
+            all_link_df.to_csv(link_csv_path, index=False)
 
-            #  zone_df = pd.read_csv('zone.csv')
-            #  source_node_df = pd.read_csv('source_node.csv')
-            #  node_df = pd.concat([zone_df, all_node_df])
-            all_node_df.to_csv(node_result_file, index=False)
-            all_link_df.to_csv(link_result_file, index=False)
-            print(f"Info: successfully converted gtfs data to node and link data:\n{node_result_file} \n{link_result_file}")
-        else:
+            print(f"Info: successfully converted gtfs data to node and link data:\n{node_csv_path} \n{link_csv_path}")
+        
             print("Info: successfully converted gtfs data to node and link and return node and link dataframes")
 
         return [all_node_df, all_link_df]
+
+
 
     def download_gtfs(self, place: str = ""):
         "learn from package: gtfs_segments"
         return None
 
-    def generate_access_link(self, zone_path: str, node_path: str, radius: float, k_closest: int = 0) -> pd.DataFrame:
-        """Generate access links between zones and nodes based on the given radius and k_closest.
+    def generate_access_link(self, hwy_node_path: str, tran_node_path: str) -> pd.DataFrame:
+        """Generate access links between the transit bus service nodes and the nearest node in another network.
 
         Args:
-            zone_path (str): _description_
-            node_path (str): _description_
-            radius (float): _description_
-            k_closest (int, optional): _description_. Defaults to 0.
+            hwy_node_path (str): file path to hwy network node flie, or another network to connect the trasnit to
+            tran_node_path (str): file path to transit network node file
 
         Returns:
             pd.DataFrame: _description_
         """
-        return generate_access_link(zone_path, node_path, radius, k_closest)
+        return generate_access_link(hwy_node_path, tran_node_path)
