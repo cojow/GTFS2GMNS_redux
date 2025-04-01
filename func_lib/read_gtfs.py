@@ -12,7 +12,7 @@ import pandas as pd
 
 from .data_convert import (determine_terminal_flag,
                                              stop_sequence_label)
-from gtfs_2_gmns.utility_lib import validate_time_period
+from gtfs2gmns.utility_lib import validate_time_period
 from pyufunc import func_running_time, get_filenames_by_ext, path2linux #,check_files_existence
 
 
