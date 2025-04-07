@@ -151,4 +151,4 @@ if __name__ == '__main__':
 
     path = r"C:\Users\roche\Anaconda_workspace\001_Github.com\GTFS2GMNS\test\GTFS\routes"
 
-    df = reading_text(path)
+    #df = reading_text(path)
