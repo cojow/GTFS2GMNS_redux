@@ -138,8 +138,12 @@ def create_service_boarding_links(directed_trip_route_stop_time_df: pd.DataFrame
                 to_node_lat = float(one_line_df.iloc[k + 1].stop_lat)
                 length = calculate_distance_from_geometry(
                     from_node_lon, from_node_lat, to_node_lon, to_node_lat)
-                lanes = number_of_trips
-                capacity = 999999
+                
+                
+                lanes = 1 # number_of_trips THlIS NEEDS TO BE ADRESSED!!!! HOW DO WE SIGNIFLY TRIPS
+                
+                
+                capacity = 0
                 VDF_fftt1 = one_line_df.iloc[k + 1].arrival_time - one_line_df.iloc[k].arrival_time
                 VDF_fftt1 = one_line_df.iloc[k + 1].arrival_time - one_line_df.iloc[k].arrival_time
                 # minutes
@@ -214,7 +218,7 @@ def create_service_boarding_links(directed_trip_route_stop_time_df: pd.DataFrame
             from_node_lon, from_node_lat, to_node_lon, to_node_lat)
         free_speed = 2
         lanes = 1
-        capacity = 999999
+        capacity = 0
         VDF_cap1 = lanes * capacity
         VDF_alpha1 = 0.15
         VDF_beta1 = 4
@@ -339,7 +343,7 @@ def create_transferring_links(all_node_df: pd.DataFrame, all_link_list: list) ->
             link_type = 3
             link_type_name = 'transferring_links'
             lanes = 1
-            capacity = 999999
+            capacity = 0
             VDF_fftt1 = (length / 1000) / 1
             VDF_cap1 = lanes * capacity
             free_speed = 1
