@@ -303,7 +303,7 @@ class GTFS2GMNS:
         all_link_df.rename(columns={0: 'id',
                                     1: 'from_node_id',
                                     2: 'to_node_id',
-                                    3: 'facility_type',
+                                    3: 'transit_type', #'facility_type'
                                     4: 'dir_flag',
                                     5: 'directed_route_id',
                                     6: 'link_type',

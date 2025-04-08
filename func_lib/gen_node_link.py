@@ -30,7 +30,7 @@ def create_nodes(directed_trip_route_stop_time_df: pd.DataFrame, agency_num: int
     physical_node_df = physical_node_df.sort_values(by=['name'])
     physical_node_df['node_id'] = np.linspace(start=1, stop=len(physical_node_df),
                                               num=len(physical_node_df)).astype('int32')
-    physical_node_df['node_id'] += int(f'{agency_num}00000')
+    physical_node_df['node_id'] += int(f'{agency_num}00000') #Node ID number
     physical_node_df['physical_node_id'] = physical_node_df['node_id']
     physical_node_df['x_coord'] = temp_df['stop_lon'].astype(float)
     physical_node_df['y_coord'] = temp_df['stop_lat'].astype(float)
@@ -60,7 +60,7 @@ def create_nodes(directed_trip_route_stop_time_df: pd.DataFrame, agency_num: int
                                              num=len(service_node_df)).astype('int32')
     service_node_df['physical_node_id'] = temp_df.apply(
         lambda x: stop_name_id_dict[x.stop_id], axis=1)
-    service_node_df['node_id'] += int(f'{agency_num}50000')
+    service_node_df['node_id'] += int(f'{agency_num}50000') #Service Node ID number
 
     service_node_df['x_coord'] = temp_df['stop_lon'].astype(
         float) - 0.000100
@@ -131,7 +131,7 @@ def create_service_boarding_links(directed_trip_route_stop_time_df: pd.DataFrame
                 dir_flag = 1
                 directed_route_id = one_line_df.iloc[k].directed_route_id
                 link_type = 1
-                link_type_name = 'service_links'
+                link_type_name = 'transit_service_links'
                 from_node_lon = float(one_line_df.iloc[k].stop_lon)
                 from_node_lat = float(one_line_df.iloc[k].stop_lat)
                 to_node_lon = float(one_line_df.iloc[k + 1].stop_lon)
@@ -209,7 +209,7 @@ def create_service_boarding_links(directed_trip_route_stop_time_df: pd.DataFrame
         dir_flag = 1
         directed_route_id = row.directed_route_id
         link_type = 2
-        link_type_name = 'boarding_links'
+        link_type_name = 'transit_boarding_links'
         to_node_lon = row.x_coord
         to_node_lat = row.y_coord
         from_node_lon = node_lon_dict[row.physical_node_id]
