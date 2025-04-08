@@ -30,7 +30,7 @@ def create_nodes(directed_trip_route_stop_time_df: pd.DataFrame, agency_num: int
     physical_node_df = physical_node_df.sort_values(by=['name'])
     physical_node_df['node_id'] = np.linspace(start=1, stop=len(physical_node_df),
                                               num=len(physical_node_df)).astype('int32')
-    physical_node_df['node_id'] += int(f'{agency_num}000000')
+    physical_node_df['node_id'] += int(f'{agency_num}00000')
     physical_node_df['physical_node_id'] = physical_node_df['node_id']
     physical_node_df['x_coord'] = temp_df['stop_lon'].astype(float)
     physical_node_df['y_coord'] = temp_df['stop_lat'].astype(float)
@@ -60,7 +60,7 @@ def create_nodes(directed_trip_route_stop_time_df: pd.DataFrame, agency_num: int
                                              num=len(service_node_df)).astype('int32')
     service_node_df['physical_node_id'] = temp_df.apply(
         lambda x: stop_name_id_dict[x.stop_id], axis=1)
-    service_node_df['node_id'] += int(f'{agency_num}500000')
+    service_node_df['node_id'] += int(f'{agency_num}50000')
 
     service_node_df['x_coord'] = temp_df['stop_lon'].astype(
         float) - 0.000100
